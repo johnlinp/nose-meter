@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'data_center',
+    'crowd_opinion',
 )
 
 MIDDLEWARE_CLASSES = (
