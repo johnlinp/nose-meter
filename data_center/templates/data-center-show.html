@@ -3,10 +3,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>真度計</title>
+        <title>{{ title }}</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <link href="{% static "css/flat-ui.css" %}" rel="stylesheet">
-        <link href="{% static "css/data-center-home.css" %}" rel="stylesheet">
+        <link href="{% static "css/data-center-show.css" %}" rel="stylesheet">
     </head>
 
     <body>
@@ -14,7 +14,7 @@
 
         <div id="button-group">
             {% for button in buttons %}
-                <div class="button"><a class="btn btn-primary" href="/data/{{ button.id }}/">{{ button.name }}</a></div>
+                <div class="button"><a class="btn btn-primary" href="/data/{{ button.levels }}/">{{ button.name }}</a></div>
             {% endfor %}
         </table>
     </body>
