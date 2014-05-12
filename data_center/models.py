@@ -27,9 +27,11 @@ class Participation(models.Model):
     candidate = models.ForeignKey(Candidate)
     election_activity = models.ForeignKey(ElectionActivity)
 
+    def __str__(self):
+        return self.candidate.name.encode('utf8')
+
 class Promise(models.Model):
     participation = models.ForeignKey(Participation)
     brief = models.TextField()
     content = models.TextField()
-
 
