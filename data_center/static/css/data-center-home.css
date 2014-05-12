@@ -1,0 +1,15 @@
+body {
+    text-align: center;
+}
+
+#button-group {
+    margin: 0 auto;
+    width: 900px;
+}
+
+.button {
+    float: left;
+    margin-bottom: 30px;
+    width: 300px;
+}
+

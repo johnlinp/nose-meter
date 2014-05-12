@@ -10,7 +10,7 @@ class District(models.Model):
 class ElectionGroup(models.Model):
     name = models.TextField()
     nickname = models.TextField()
-    vote_day = models.DateField()
+    vote_date = models.DateField()
 
 class ElectionActivity(models.Model):
     election_group = models.ForeignKey(ElectionGroup)
