@@ -1,0 +1,18 @@
+body {
+    background: #ECF0F1;
+    font-family: "Microsoft Jhenghei", "DFKai-sb";
+}
+
+#left {
+    margin-left: 30px;
+}
+
+#paragraph {
+    margin-top: 50px;
+    max-width: 300px;
+}
+
+.align-right {
+    text-align: right;
+}
+
