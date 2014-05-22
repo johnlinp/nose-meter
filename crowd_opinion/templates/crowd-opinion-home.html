@@ -12,7 +12,7 @@
     <body>
         <div id="left">
             <h1>真度計</h1>
-            <h4>政見支票別亂開，我們都在看。</h1>
+            <h4>政見支票別亂開，我們都在看。</h4>
 
             <div id="paragraph">
                 <p>
@@ -28,11 +28,20 @@
                 </p>
 
                 <p>
-                    <div>現在就來關心一下年底要投的人，<div>
-                    <div>之前說要做的事情，<div>
-                    <div>有沒有真的做到。<div>
+                    <div>現在就來關心一下年底要投的人，</div>
+                    <div>之前說要做的事情，</div>
+                    <div>有沒有真的做到。</div>
                 </p>
             </div>
         </div>
+
+        <div id="right">
+            <h3 id="county-name"></h3>
+            <svg id="taiwan"></svg>
+        </div>
     </body>
+
+    <script src="{% static "js/d3.v3.min.js" %}"></script>
+    <script src="{% static "js/topojson.v1.min.js" %}"></script>
+    <script src="{% static "js/crowd-opinion-home.js" %}"></script>
 </html>

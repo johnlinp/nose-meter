@@ -4,7 +4,18 @@ body {
 }
 
 #left {
+    float: left;
     margin-left: 30px;
+}
+
+#right {
+    float: right;
+}
+
+#county-name {
+    height: 40px;
+    text-align: right;
+    margin-right: 290px;
 }
 
 #paragraph {
