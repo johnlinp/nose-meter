@@ -1,0 +1,22 @@
+body {
+    background: #ECF0F1;
+    font-family: "Microsoft Jhenghei", "DFKai-sb";
+    text-align: center;
+}
+
+#candidate-group {
+    margin: 0 auto;
+    width: 900px;
+}
+
+.candidate {
+    float: left;
+    margin-bottom: 30px;
+    width: 300px;
+}
+
+.candidate-image {
+    max-width: 200px;
+    max-height: 200px;
+}
+

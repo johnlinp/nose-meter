@@ -1,0 +1,31 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>真度計 - {{ county_name }}</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <link href="{% static "css/flat-ui.css" %}" rel="stylesheet">
+        <link href="{% static "css/crowd-opinion-district.css" %}" rel="stylesheet">
+    </head>
+
+    <body>
+        <h1>{{ county_name }}</h1>
+
+        <div id="candidate-group">
+            {% for candidate in candidates %}
+                <div class="candidate">
+                    <a href="javascript: void(0);">
+                        <div>
+                            <img class="candidate-image"
+                                 src="{% static "images/candidate/"|add:candidate.name %}"
+                                 onError="this.onerror=null;this.src='{% static "images/general/candidate-not-found.jpg" %}';"
+                                 />
+                        </div>
+                        <div>{{ candidate.name }}</div>
+                    </a>
+                </div>
+            {% endfor %}
+        </table>
+    </body>
+</html>
