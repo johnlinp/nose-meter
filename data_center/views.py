@@ -41,3 +41,23 @@ def show_all(request, eg_id=None, ea_id=None, p_id=None):
        
     return render(request, 'data-center-show.html', args)
 
+def show_tmp(request):
+    election_group = models.ElectionGroup.objects.get(id=1)
+    election_activities = models.ElectionActivity.objects.filter(election_group=election_group)
+    items = []
+    for election_activity in election_activities:
+        participations = models.Participation.objects.filter(election_activity=election_activity)
+        for participation in participations:
+            candidate = participation.candidate
+            item = {
+                'content': election_activity.district.name + ',' + candidate.name + ',' + candidate.party,
+            }
+            items.append(item)
+
+    args = {
+        'title': '九合一候選人們',
+        'items': items,
+    }
+       
+    return render(request, 'data-center-tmp.html', args)
+
