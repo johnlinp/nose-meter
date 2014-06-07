@@ -1,6 +1,6 @@
 (function() {
     var loadTaiwan = function() {
-        d3.json("/static/data/tw.json", function(data) {
+        d3.json('/static/data/tw.json', function(data) {
             adjustTaiwanSize();
 
             var topo = topojson.feature(data, data.objects.counties);
@@ -20,11 +20,11 @@
     };
 
     var putCounties = function(topo, path) {
-        d3.select("#taiwan").selectAll("path")
+        d3.select('#taiwan').selectAll('path')
             .data(topo.features)
             .enter()
-            .append("path")
-            .attr("d", path)
+            .append('path')
+            .attr('d', path)
             .attr('fill', 'DarkGreen')
             .on('mouseover', function(d) {
                 d3.selectAll('path')
@@ -43,7 +43,7 @@
             })
             .on('click', function(d) {
                 console.log(d);
-                location.href = "/district/" + d.properties.name;
+                location.href = '/district/' + d.properties.name;
             });
     };
 
