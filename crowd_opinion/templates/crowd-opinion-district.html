@@ -10,31 +10,38 @@
     </head>
 
     <body>
-        <div id="content">
+        <div id="whole">
             <div id="title" class="clickable" data-click-url="/">
-                <span class="small-h1">真度計</span>
-                <span class="wide-space"></span>
-                <span class="small-h4">政見支票別亂開，我們都在看。</span>
+                <div>
+                    <span class="small-h1">真度計</span>
+                    <span class="wide-space"></span>
+                    <span class="small-h4">政見支票別亂開，我們都在看。</span>
+                </div>
+                <div>
+                    <hr id="title-hline">
+                </div>
             </div>
 
-            <h1>{{ district_name }}</h1>
+            <div id="content">
+                <h1>{{ district_name }}</h1>
 
-            <div id="candidate-group">
-                {% for candidate in candidates %}
-                    <div class="candidate clickable" data-click-url="/candidate/{{ candidate.name }}">
-                        <div>
-                            <img class="candidate-image"
-                                 src="{% static "images/candidate/"|add:candidate.name %}"
-                                 onError="this.onerror=null;this.src='{% static "images/general/candidate-not-found.jpg" %}';"
-                                 />
+                <div id="candidate-group">
+                    {% for candidate in candidates %}
+                        <div class="candidate clickable" data-click-url="/candidate/{{ candidate.name }}">
+                            <div>
+                                <img class="candidate-image"
+                                     src="{% static "images/candidate/"|add:candidate.name %}"
+                                     onError="this.onerror=null;this.src='{% static "images/general/candidate-not-found.jpg" %}';"
+                                     />
+                            </div>
+                            <div><b>{{ candidate.name }}</b></div>
                         </div>
-                        <div><b>{{ candidate.name }}</b></div>
-                    </div>
-                {% endfor %}
+                    {% endfor %}
+                </div>
             </div>
         </div>
 
         <script src="{% static "js/d3.v3.min.js" %}"></script>
-        <script src="{% static "js/crowd-opinion-district.js" %}"></script>
+        <script src="{% static "js/common-tools.js" %}"></script>
     </body>
 </html>

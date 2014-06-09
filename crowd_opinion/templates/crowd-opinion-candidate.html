@@ -3,14 +3,61 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>真度計 - {{ candidate_name }}</title>
+        <title>真度計 - {{ candidate.name }}</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <link href="{% static "css/flat-ui.css" %}" rel="stylesheet">
         <link href="{% static "css/crowd-opinion-candidate.css" %}" rel="stylesheet">
     </head>
 
     <body>
-        <h1>{{ candidate_name }}</h1>
+        <div id="whole">
+            <div id="title" class="clickable" data-click-url="/">
+                <div>
+                    <span class="small-h1">真度計</span>
+                    <span class="wide-space"></span>
+                    <span class="small-h4">政見支票別亂開，我們都在看。</span>
+                </div>
+                <div>
+                    <hr id="title-hline">
+                </div>
+            </div>
 
+            <div id="content">
+                <div class="candidate-info">
+                    <h1>{{ candidate.name }}</h1>
+                    <div>
+                        <img class="candidate-image"
+                             src="{% static "images/candidate/"|add:candidate.name %}"
+                             onError="this.onerror=null;this.src='{% static "images/general/candidate-not-found.jpg" %}';"
+                             />
+                    </div>
+                    <h4>{{ candidate.party }}</h4>
+                    <div class="candidate-educations">
+                        <div class="small-h4">學歷</div>
+                        {% for education in candidate.educations %}
+                            <div>{{ education }}</div>
+                        {% endfor %}
+                    </div>
+                    <div class="candidate-experiences">
+                        <div class="small-h4">曾經選上過</div>
+                        {% for experience in candidate.experiences %}
+                            <div>{{ experience }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="candidate-promises">
+                    {% for promise in candidate.promises %}
+                        <div class="single-promise">
+                            <div class="small-h4">{{ promise.position }}</div>
+                            <div>{{ promise.scores }} {{ promise.progress }}</div>
+                            <div>{{ promise.content }}</div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <script src="{% static "js/d3.v3.min.js" %}"></script>
+        <script src="{% static "js/common-tools.js" %}"></script>
     </body>
 </html>

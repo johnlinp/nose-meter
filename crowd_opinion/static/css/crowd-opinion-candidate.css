@@ -13,7 +13,6 @@ body {
 }
 
 #content {
-    text-align: center;
 }
 
 #title-hline {
@@ -37,22 +36,33 @@ body {
     width: 16px;
 }
 
-#candidate-group {
-    margin: 0 auto;
-    width: 900px;
-}
-
-.candidate {
+.candidate-info {
+    position: fixed;
     float: left;
     margin: 20px;
-    padding: 20px;
-    width: 200px;
+    padding-bottom: 20px;
+    width: 350px;
     background: #FCFCFC;
     border-radius: 15px;
+    text-align: center;
+}
+
+.candidate-promises {
+    position: absolute;
+    left: 450px;
+    padding-right: 30px;
 }
 
 .candidate-image {
-    max-width: 200px;
-    max-height: 200px;
+    max-width: 250px;
+    max-height: 300px;
+}
+
+.candidate-educations, .candidate-experiences {
+    margin-top: 30px;
+}
+
+.single-promise {
+    margin-top: 40px;
 }
 
