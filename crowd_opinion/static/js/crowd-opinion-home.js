@@ -5,7 +5,7 @@
 
             var topo = topojson.feature(data, data.objects.counties);
 
-            var prj = d3.geo.mercator().center([120.979531, 23.978567]).scale(9000);
+            var prj = d3.geo.mercator().center([120.979531, 23.978567]).scale(7800);
             var path = d3.geo.path().projection(prj);
 
             putCounties(topo, path);
@@ -13,10 +13,10 @@
     };
 
     var adjustTaiwanSize = function() {
+        var leftWidth = parseFloat(d3.select('#left').style('width').replace('px', ''));
         d3.select('#taiwan')
-            .attr('width', screen.width - 500)
-            .attr('height', '800');
-        console.log(screen.width);
+            .attr('width', screen.width - leftWidth - 100)
+            .attr('height', screen.height - 300);
     };
 
     var putCounties = function(topo, path) {
