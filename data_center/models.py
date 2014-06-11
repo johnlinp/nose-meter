@@ -24,8 +24,17 @@ class ElectionActivity(models.Model):
         return self.district.name.encode('utf8') + ' - ' + self.target.encode('utf8')
 
 class Participation(models.Model):
+    TBD = 'tbd'
+    ELECTED = 'elected'
+    FAILED = 'failed'
+    RESULT_CHOICES = (
+        (TBD, 'tbd'),
+        (ELECTED, 'elected'),
+        (FAILED, 'failed'),
+    )
     candidate = models.ForeignKey(Candidate)
     election_activity = models.ForeignKey(ElectionActivity)
+    result = models.CharField(max_length=255, choices=RESULT_CHOICES, default=TBD)
 
     def __str__(self):
         return self.candidate.name.encode('utf8')

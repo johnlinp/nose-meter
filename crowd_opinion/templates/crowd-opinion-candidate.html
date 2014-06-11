@@ -42,6 +42,8 @@
                         <div class="small-h4">曾經選上過</div>
                         {% for experience in candidate.experiences %}
                             <div>{{ experience }}</div>
+                        {% empty %}
+                            <div>尚無經驗</div>
                         {% endfor %}
                     </div>
                 </div>
@@ -52,6 +54,8 @@
                             <div>{{ promise.scores }} {{ promise.progress }}</div>
                             <div>{{ promise.content }}</div>
                         </div>
+                    {% empty %}
+                        <h3>尚無當選政見</h3>
                     {% endfor %}
                 </div>
             </div>
