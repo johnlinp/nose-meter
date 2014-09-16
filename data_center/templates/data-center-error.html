@@ -1,0 +1,19 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{ title }}</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <link href="{% static "css/flat-ui.css" %}" rel="stylesheet">
+        <link href="{% static "css/data-center-error.css" %}" rel="stylesheet">
+    </head>
+
+    <body>
+        <h1>哎喲!</h1>
+
+        <div>
+            <p class="error-message">{{ message }}</p>
+        </div>
+    </body>
+</html>

@@ -1,4 +1,4 @@
-body {
+#header {
     text-align: center;
 }
 
@@ -7,9 +7,36 @@ body {
     width: 900px;
 }
 
-.button {
-    float: left;
+#horizontal-line {
+    margin: 0 auto;
     margin-bottom: 30px;
     width: 300px;
+}
+
+#insert-item {
+    margin: 0 auto;
+    width: 900px;
+    text-align: center;
+}
+
+.button-container {
+    margin-bottom: 30px;
+    width: 290px;
+    display: inline-block;
+    text-align: center;
+}
+
+.input-container {
+    margin: 0 auto;
+    margin-bottom: 30px;
+    width: 400px;
+}
+
+.input-prompt {
+    margin-right: 10px;
+}
+
+.hand {
+    cursor: pointer;
 }
 
