@@ -42,9 +42,31 @@ def insert_all(request):
         election_group_nickname = request.POST['nickname']
         election_group_vote_date = request.POST['vote-date']
     elif subject == 'election-activity':
-        election_groupa_id = request.POST['election-group-id']
+        election_group_id = request.POST['election-group-id']
         district_name = request.POST['district-name']
         election_activity_target = request.POST['target']
+
+        election_group = models.ElectionGroup.objects.get(id=election_group_id)
+
+        try:
+            district = models.District.objects.get(name=district_name)
+        except models.District.DoesNotExist:
+            district = models.District(name=district_name)
+            district.save()
+
+        try:
+            election_activity = models.ElectionActivity.objects.get(
+                    election_group=election_group,
+                    district=district,
+                    target=election_activity_target)
+            return render(request, 'data-center-error.html', {'message': '這個選舉已經存在啦!'})
+        except models.ElectionActivity.DoesNotExist:
+            election_activity = models.ElectionActivity(
+                    election_group=election_group,
+                    district=district,
+                    target=election_activity_target)
+            election_activity.save()
+
     elif subject == 'candidate':
         election_activity_id = request.POST['election-activity-id']
         candidate_name = request.POST['name'].strip()
