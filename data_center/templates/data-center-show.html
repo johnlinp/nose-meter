@@ -36,7 +36,7 @@
                     {% if input.explicit %}
                     <div class="input-container">
                         <span class="input-prompt">{{ input.title }}</span>
-                        <input type="text" name="{{ input.name }}" placeholder="{{ input.placeholder }}" class="form-control" />
+                        <input type="text" name="{{ input.name }}" placeholder="{{ input.placeholder }}" value="{{ input.history }}" class="form-control" />
                     </div>
                     {% else %}
                         <input type="hidden" name="{{ input.name }}" value="{{ input.value }}" />

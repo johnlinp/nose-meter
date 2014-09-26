@@ -19,7 +19,7 @@ def show_all(request, eg_id=None, ea_id=None, pa_id=None):
 
     title = _get_show_title(subject, eg_id, ea_id, pa_id)
     buttons = _get_show_buttons(subject, eg_id, ea_id, pa_id)
-    inputs = _get_show_inputs(subject, request.path, eg_id, ea_id, pa_id)
+    inputs = _get_show_inputs(subject, request.path, request.session, eg_id, ea_id, pa_id)
 
     args = {
         'title': title,
@@ -36,6 +36,11 @@ def insert_all(request):
 
     redirect_path = request.POST['redirect']
     subject = request.POST['subject']
+
+    request.session['history'] = {}
+    request.session['history'][subject] = {}
+    for key, value in request.POST.items():
+        request.session['history'][subject][key] = value
 
     if subject == 'election-group':
         election_group_name = request.POST['name']
@@ -184,7 +189,7 @@ def _get_show_buttons(subject, eg_id, ea_id, pa_id):
 
     return buttons
 
-def _get_show_inputs(subject, path, eg_id, ea_id, pa_id):
+def _get_show_inputs(subject, path, session, eg_id, ea_id, pa_id):
     if subject == 'election-group':
         items = [
             {
@@ -274,6 +279,12 @@ def _get_show_inputs(subject, path, eg_id, ea_id, pa_id):
         ]
     else:
         raise
+
+    if 'history' in session and subject in session['history']:
+        for item in items:
+            name = item['name']
+            if name in session['history'][subject]:
+                item['history'] = session['history'][subject][name]
 
     inputs = {
         'subject': subject,
