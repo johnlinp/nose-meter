@@ -44,3 +44,6 @@ class Promise(models.Model):
     brief = models.TextField()
     content = models.TextField()
 
+    def __str__(self):
+        return self.brief.encode('utf8')
+

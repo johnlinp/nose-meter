@@ -19,6 +19,8 @@
                 <div class="button-container">
                     <a class="btn btn-primary" href="/data/{{ button.levels }}/">{{ button.name }}</a>
                 </div>
+            {% empty %}
+                <div class="no-data">目前沒有資料</div>
             {% endfor %}
         </div>
         <div id="horizontal-line">

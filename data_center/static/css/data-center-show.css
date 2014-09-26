@@ -40,3 +40,8 @@
     cursor: pointer;
 }
 
+.no-data {
+    text-align: center;
+    font-size: 30px;
+}
+

@@ -5,21 +5,21 @@ from django.shortcuts import redirect
 from data_center import models
 
 
-def show_all(request, eg_id=None, ea_id=None, p_id=None):
+def show_all(request, eg_id=None, ea_id=None, pa_id=None):
     election_group = None
 
     if eg_id is None:
         subject = 'election-group'
     elif ea_id is None:
         subject = 'election-activity'
-    elif p_id is None:
+    elif pa_id is None:
         subject = 'candidate'
     else:
-        raise
+        subject = 'promise'
 
-    title = _get_show_title(subject, eg_id, ea_id, p_id)
-    buttons = _get_show_buttons(subject, eg_id, ea_id, p_id)
-    inputs = _get_show_inputs(subject, request.path, eg_id, ea_id, p_id)
+    title = _get_show_title(subject, eg_id, ea_id, pa_id)
+    buttons = _get_show_buttons(subject, eg_id, ea_id, pa_id)
+    inputs = _get_show_inputs(subject, request.path, eg_id, ea_id, pa_id)
 
     args = {
         'title': title,
@@ -42,7 +42,7 @@ def insert_all(request):
         election_group_nickname = request.POST['nickname']
         election_group_vote_date = request.POST['vote-date']
     elif subject == 'election-activity':
-        election_group_id = request.POST['election-group-id']
+        election_groupa_id = request.POST['election-group-id']
         district_name = request.POST['district-name']
         election_activity_target = request.POST['target']
     elif subject == 'candidate':
@@ -72,6 +72,18 @@ def insert_all(request):
                     election_activity=election_activity,
                     result=participation_result)
             participation.save()
+    elif subject == 'promise':
+        participation_id = request.POST['participation-id']
+        promise_brief = request.POST['brief'].strip()
+        promise_content = request.POST['content'].strip()
+
+        if promise_brief == '' or promise_content == '':
+            return render(request, 'data-center-error.html', {'message': '政見不可以是空白!'})
+
+        participation = models.Participation.objects.get(id=participation_id)
+
+        promise = models.Promise(participation=participation, brief=promise_brief, content=promise_content)
+        promise.save()
     else:
         raise
 
@@ -79,27 +91,31 @@ def insert_all(request):
 
 
 def show_tmp(request):
-    election_group = models.ElectionGroup.objects.get(id=1)
-    election_activities = models.ElectionActivity.objects.filter(election_group=election_group)
+    election_activities = models.ElectionActivity.objects.filter(election_group__id=1)
     items = []
     for election_activity in election_activities:
         participations = models.Participation.objects.filter(election_activity=election_activity)
         for participation in participations:
             candidate = participation.candidate
-            item = {
-                'content': election_activity.district.name + ',' + candidate.name + ',' + candidate.party,
-            }
-            items.append(item)
+            old_records = models.Participation.objects.filter(candidate=candidate, result='elected')
+            if old_records:
+                name = candidate.name.encode('utf8')
+                group = str(old_records[0].election_activity.election_group)
+                activity = str(old_records[0].election_activity)
+                item = {
+                    'content': name + ': ' + group + ', ' + activity,
+                }
+                items.append(item)
 
     args = {
-        'title': '九合一候選人們',
+        'title': '曾經當選過的候選人們',
         'items': items,
     }
 
     return render(request, 'data-center-tmp.html', args)
 
 
-def _get_show_title(subject, eg_id, ea_id, p_id):
+def _get_show_title(subject, eg_id, ea_id, pa_id):
     if subject == 'election-group':
         title = '所有的大選們'
     elif subject == 'election-activity':
@@ -108,26 +124,30 @@ def _get_show_title(subject, eg_id, ea_id, p_id):
     elif subject == 'candidate':
         election_activity = models.ElectionActivity.objects.get(id=ea_id)
         title = str(election_activity)
+    elif subject == 'promise':
+        participation = models.Participation.objects.get(id=pa_id)
+        title = str(participation)
     else:
         raise
 
     return title
 
-def _get_show_buttons(subject, eg_id, ea_id, p_id):
+def _get_show_buttons(subject, eg_id, ea_id, pa_id):
     if subject == 'election-group':
         election_groups = models.ElectionGroup.objects.all()
         items = election_groups
         levels = []
     elif subject == 'election-activity':
-        election_group = models.ElectionGroup.objects.get(id=eg_id)
-        election_activities = models.ElectionActivity.objects.filter(election_group=election_group)
+        election_activities = models.ElectionActivity.objects.filter(election_group__id=eg_id)
         items = election_activities
         levels = [eg_id]
     elif subject == 'candidate':
-        election_group = models.ElectionGroup.objects.get(id=eg_id)
-        election_activity = models.ElectionActivity.objects.get(id=ea_id)
-        participations = models.Participation.objects.filter(election_activity=election_activity)
+        participations = models.Participation.objects.filter(election_activity__id=ea_id)
         items = participations
+        levels = [eg_id, ea_id]
+    elif subject == 'promise':
+        promises = models.Promise.objects.filter(participation__id=pa_id)
+        items = promises
         levels = [eg_id, ea_id]
     else:
         raise
@@ -142,7 +162,7 @@ def _get_show_buttons(subject, eg_id, ea_id, p_id):
 
     return buttons
 
-def _get_show_inputs(subject, path, eg_id, ea_id, p_id):
+def _get_show_inputs(subject, path, eg_id, ea_id, pa_id):
     if subject == 'election-group':
         items = [
             {
@@ -208,6 +228,26 @@ def _get_show_inputs(subject, path, eg_id, ea_id, p_id):
                 'name': 'result',
                 'title': '選舉結果',
                 'placeholder': '請填 tbd 或是 elected',
+            },
+        ]
+    elif subject == 'promise':
+        items = [
+            {
+                'explicit': False,
+                'name': 'participation-id',
+                'value': pa_id,
+            },
+            {
+                'explicit': True,
+                'name': 'brief',
+                'title': '簡要',
+                'placeholder': '請填一句話就好',
+            },
+            {
+                'explicit': True,
+                'name': 'content',
+                'title': '內容',
+                'placeholder': '可以詳細一點',
             },
         ]
     else:
