@@ -1,5 +1,9 @@
 # -*- coding: utf8 -*-
 
+import re
+import subprocess
+import datetime
+from bs4 import BeautifulSoup
 from django.shortcuts import render
 from django.shortcuts import redirect
 from data_center import models
@@ -37,15 +41,85 @@ def insert_all(request):
     redirect_path = request.POST['redirect']
     subject = request.POST['subject']
 
-    request.session['history'] = {}
-    request.session['history'][subject] = {}
-    for key, value in request.POST.items():
-        request.session['history'][subject][key] = value
-
     if subject == 'election-group':
         election_group_name = request.POST['name']
         election_group_nickname = request.POST['nickname']
-        election_group_vote_date = request.POST['vote-date']
+        cec_url = request.POST['cec-url']
+
+        cmd = ['wget', '-q', '-O', '-', cec_url]
+        popen = subprocess.Popen(cmd, stdout=subprocess.PIPE)
+        webpage, trash = popen.communicate()
+        soup = BeautifulSoup(webpage)
+
+        date_div = soup.find('div', attrs={'class': 'date'})
+        date_str = date_div.string
+        mo = re.match(u'投票日期：中華民國(\d\d)年(\d\d)月(\d\d)日', date_str)
+        yy, mm, dd = mo.group(1), mo.group(2), mo.group(3)
+        yyyy, mm, dd = int(yy) + 1911, int(mm), int(dd)
+        date = datetime.date(yyyy, mm, dd)
+
+        try:
+            election_group = models.ElectionGroup.objects.get(name=election_group_name)
+        except models.ElectionGroup.DoesNotExist:
+            election_group = models.ElectionGroup(name=election_group_name, nickname=election_group_nickname, vote_date=date)
+            election_group.save()
+
+        table = soup.find('table', attrs={'class': 'ctks'})
+        rows = table.find_all('tr', attrs={'class': 'data'})
+
+        for row in rows:
+            cells = row.find_all('td')
+            if 'rowspan' in cells[0].attrs:
+                district_name = _format_district(cells.pop(0).string)
+                try:
+                    district = models.District.objects.get(name=district_name)
+                except models.District.DoesNotExist:
+                    district = models.District(name=district_name)
+                    district.save()
+
+                target = _find_target(election_group_name, district_name)
+
+                try:
+                    election_activity = models.ElectionActivity.objects.get(
+                            election_group=election_group,
+                            district=district,
+                            target=target)
+                except models.ElectionActivity.DoesNotExist:
+                    election_activity = models.ElectionActivity(
+                            election_group=election_group,
+                            district=district,
+                            target=target)
+                    election_activity.save()
+
+            name = cells[0].string.encode('utf8')
+            party = cells[4].string.encode('utf8')
+            elected = cells[7].string == '*'
+
+            if elected:
+                try:
+                    candidate = models.Candidate.objects.get(name=name)
+                except models.Candidate.DoesNotExist:
+                    candidate = models.Candidate(name=name, party=party)
+                    try:
+                        candidate.save()
+                    except:
+                        candidate.name = name[4:]
+                        candidate.save()
+                except models.Candidate.MultipleObjectsReturned:
+                    return render(request, 'data-center-error.html', {'message': '目前不支援同名同姓的狀況…'})
+
+                try:
+                    participation = models.Participation.objects.get(
+                            candidate=candidate,
+                            election_activity=election_activity,
+                            result='elected')
+                except models.Participation.DoesNotExist:
+                    participation = models.Participation(
+                            candidate=candidate,
+                            election_activity=election_activity,
+                            result='elected')
+                    participation.save()
+
     elif subject == 'election-activity':
         election_group_id = request.POST['election-group-id']
         district_name = request.POST['district-name']
@@ -114,6 +188,11 @@ def insert_all(request):
     else:
         raise
 
+    request.session['history'] = {}
+    request.session['history'][subject] = {}
+    for key, value in request.POST.items():
+        request.session['history'][subject][key] = value
+
     return redirect(redirect_path)
 
 
@@ -133,6 +212,12 @@ def show_tmp(request):
                     'content': name + ': ' + group + ', ' + activity,
                 }
                 items.append(item)
+            #else:
+            #    name = candidate.name.encode('utf8')
+            #    item = {
+            #        'content': name,
+            #    }
+            #    items.append(item)
 
     args = {
         'title': '曾經當選過的候選人們',
@@ -141,6 +226,81 @@ def show_tmp(request):
 
     return render(request, 'data-center-tmp.html', args)
 
+
+def _format_district(district):
+    mo = re.match(u'^(.{2}(市|縣))選(舉?)區$', district)
+    if mo:
+        return mo.group(1)
+
+    mo = re.match(u'^(.{2}(市|縣))$', district)
+    if mo:
+        return mo.group(1)
+
+    mo = re.match(u'^(.{2}(市|縣))第(\d+)選(舉?)區$', district)
+    if mo:
+        number = mo.group(3)
+        return mo.group(1) + u'第 ' + str(int(number)) + u' 選舉區'
+
+    mo = re.match(u'^(.{2}(市|縣))第(.+)選(舉?)區$', district)
+    if mo:
+        number = mo.group(3)
+        return mo.group(1) + u'第 ' + str(_zh2num(number)) + u' 選舉區'
+
+    raise Exception('Malformed election district')
+
+
+def _zh2num(zh):
+    table = {
+        u'一': 1,
+        u'二': 2,
+        u'三': 3,
+        u'四': 4,
+        u'五': 5,
+        u'六': 6,
+        u'七': 7,
+        u'八': 8,
+        u'九': 9,
+        u'十': 10,
+        u'十一': 11,
+        u'十二': 12,
+        u'十三': 13,
+        u'十四': 14,
+        u'十五': 15,
+        u'十六': 16,
+        u'十七': 17,
+        u'十八': 18,
+        u'十九': 19,
+        u'二十': 20,
+    }
+
+    if zh in table:
+        return table[zh]
+
+    raise Exception('Unsupported zh number')
+
+
+def _find_target(election_group_name, district_name):
+    if '立法委員' in election_group_name.encode('utf8'):
+        return '立法委員'
+    elif '縣市長' in election_group_name.encode('utf8'):
+        if re.match(u'.{2}市', district_name):
+            return '市長'
+        elif re.match(u'.{2}縣', district_name):
+            return '縣長'
+    elif '縣市議員' in election_group_name.encode('utf8'):
+        if re.match(u'.{2}市', district_name):
+            return '市議員'
+        elif re.match(u'.{2}縣', district_name):
+            return '縣議員'
+    elif '省市議員' in election_group_name.encode('utf8'):
+        if re.match(u'.{2}市', district_name):
+            return '市議員'
+        elif re.match(u'.{2}縣', district_name):
+            return '省議員'
+    elif '國民大會代表' in election_group_name.encode('utf8'):
+        return '國民大會代表'
+
+    raise Exception("Can't determine election target")
 
 def _get_show_title(subject, eg_id, ea_id, pa_id):
     if subject == 'election-group':
@@ -206,9 +366,9 @@ def _get_show_inputs(subject, path, session, eg_id, ea_id, pa_id):
             },
             {
                 'explicit': True,
-                'name': 'vote-date',
-                'title': '投票日期',
-                'placeholder': '格式請輸入 2014/2/23',
+                'name': 'cec-url',
+                'title': '中選會資料庫網址',
+                'placeholder': '請參考 db.cec.gov.tw',
             },
         ]
     elif subject == 'election-activity':

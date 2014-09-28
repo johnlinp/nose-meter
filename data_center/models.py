@@ -7,6 +7,9 @@ class Candidate(models.Model):
 class District(models.Model):
     name = models.TextField()
 
+    def __str__(self):
+        return self.name.encode('utf8')
+
 class ElectionGroup(models.Model):
     name = models.TextField()
     nickname = models.TextField()
