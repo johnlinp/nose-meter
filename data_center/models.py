@@ -50,3 +50,7 @@ class Promise(models.Model):
     def __str__(self):
         return self.brief.encode('utf8')
 
+class Reference(models.Model):
+    participation = models.ForeignKey(Participation)
+    url = models.TextField()
+

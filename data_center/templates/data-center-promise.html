@@ -1,0 +1,22 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{ title }}</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <link href="{% static "css/flat-ui.css" %}" rel="stylesheet">
+        <link href="{% static "css/data-center-promise.css" %}" rel="stylesheet">
+    </head>
+
+    <body>
+        <div id="header">
+            <h1>{{ title }}</h1>
+            <h5>{{ prefix }}</h5>
+        </div>
+
+        <div class="promise">
+            <p>{{ promise }}</p>
+        </div>
+    </body>
+</html>

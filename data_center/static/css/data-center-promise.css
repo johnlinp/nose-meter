@@ -1,0 +1,13 @@
+body {
+    text-align: center;
+}
+
+.promise {
+    background: #CCCCCC;
+    border-radius: 9px;
+    margin: 0 auto;
+    margin-top: 30px;
+    width: 500px;
+    padding: 50px 100px;
+}
+

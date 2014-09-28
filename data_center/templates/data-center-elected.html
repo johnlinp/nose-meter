@@ -1,0 +1,24 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>曾經當選過的市長候選人們</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <link href="{% static "css/flat-ui.css" %}" rel="stylesheet">
+        <link href="{% static "css/data-center-elected.css" %}" rel="stylesheet">
+    </head>
+
+    <body>
+        <h1>曾經當選過的市長候選人們</h1>
+
+        <div id="content">
+            {% for candidate in candidates %}
+                <h3>{{ candidate.name }}</h3>
+                {% for record in candidate.records %}
+                    <div><a href="{{ record.link }}">{{ record.content }}</a></div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </body>
+</html>

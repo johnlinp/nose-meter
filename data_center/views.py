@@ -10,8 +10,6 @@ from data_center import models
 
 
 def show_all(request, eg_id=None, ea_id=None, pa_id=None):
-    election_group = None
-
     if eg_id is None:
         subject = 'election-group'
     elif ea_id is None:
@@ -22,16 +20,31 @@ def show_all(request, eg_id=None, ea_id=None, pa_id=None):
         subject = 'promise'
 
     title = _get_show_title(subject, eg_id, ea_id, pa_id)
+    prefix = _get_show_prefix(subject, eg_id, ea_id, pa_id)
     buttons = _get_show_buttons(subject, eg_id, ea_id, pa_id)
     inputs = _get_show_inputs(subject, request.path, request.session, eg_id, ea_id, pa_id)
 
     args = {
         'title': title,
+        'prefix': prefix,
         'buttons': buttons,
         'inputs': inputs,
     }
 
     return render(request, 'data-center-show.html', args)
+
+
+def show_promise(request, eg_id, ea_id, pa_id, pr_id):
+    promise = models.Promise.objects.get(id=pr_id)
+    subject = 'end'
+    prefix = _get_show_prefix(subject, eg_id, ea_id, pa_id)
+    args = {
+        'title': promise.brief,
+        'prefix': prefix,
+        'promise': promise.content,
+    }
+
+    return render(request, 'data-center-promise.html', args)
 
 
 def insert_all(request):
@@ -197,34 +210,47 @@ def insert_all(request):
 
 
 def show_tmp(request):
+    args = {
+        'title': '',
+        'items': [],
+    }
+
+    return render(request, 'data-center-tmp.html', args)
+
+
+def show_elected(request):
     election_activities = models.ElectionActivity.objects.filter(election_group__id=1)
-    items = []
+    candidate_info_list = []
     for election_activity in election_activities:
         participations = models.Participation.objects.filter(election_activity=election_activity)
         for participation in participations:
             candidate = participation.candidate
             old_records = models.Participation.objects.filter(candidate=candidate, result='elected')
-            if old_records:
-                name = candidate.name.encode('utf8')
-                group = str(old_records[0].election_activity.election_group)
-                activity = str(old_records[0].election_activity)
-                item = {
-                    'content': name + ': ' + group + ', ' + activity,
+            if not old_records:
+                continue
+
+            candidate_info = {
+                'name': candidate.name,
+                'records': [],
+            }
+            for old_record in old_records:
+                group_str = str(old_record.election_activity.election_group)
+                activity_str = str(old_record.election_activity)
+                group_id = old_record.election_activity.election_group.id
+                activity_id = old_record.election_activity.id
+                participation_id = old_record.id
+                record_info = {
+                    'content': group_str + ' - ' + activity_str,
+                    'link': '/data/{}/{}/{}'.format(group_id, activity_id, participation_id),
                 }
-                items.append(item)
-            #else:
-            #    name = candidate.name.encode('utf8')
-            #    item = {
-            #        'content': name,
-            #    }
-            #    items.append(item)
+                candidate_info['records'].append(record_info)
+            candidate_info_list.append(candidate_info)
 
     args = {
-        'title': '曾經當選過的候選人們',
-        'items': items,
+        'candidates': candidate_info_list,
     }
 
-    return render(request, 'data-center-tmp.html', args)
+    return render(request, 'data-center-elected.html', args)
 
 
 def _format_district(district):
@@ -302,6 +328,7 @@ def _find_target(election_group_name, district_name):
 
     raise Exception("Can't determine election target")
 
+
 def _get_show_title(subject, eg_id, ea_id, pa_id):
     if subject == 'election-group':
         title = '所有的大選們'
@@ -319,6 +346,30 @@ def _get_show_title(subject, eg_id, ea_id, pa_id):
 
     return title
 
+
+def _get_show_prefix(subject, eg_id, ea_id, pa_id):
+    if subject == 'election-group':
+        prefix = ''
+    elif subject == 'election-activity':
+        prefix = ''
+    elif subject == 'candidate':
+        election_group = models.ElectionGroup.objects.get(id=eg_id)
+        prefix = str(election_group)
+    elif subject == 'promise':
+        election_group = models.ElectionGroup.objects.get(id=eg_id)
+        election_activity = models.ElectionActivity.objects.get(id=ea_id)
+        prefix = str(election_group) + ' - ' + str(election_activity)
+    elif subject == 'end':
+        election_group = models.ElectionGroup.objects.get(id=eg_id)
+        election_activity = models.ElectionActivity.objects.get(id=ea_id)
+        participation = models.Participation.objects.get(id=pa_id)
+        prefix = str(election_group) + ' - ' + str(election_activity) + ' - ' + str(participation)
+    else:
+        raise
+
+    return prefix
+
+
 def _get_show_buttons(subject, eg_id, ea_id, pa_id):
     if subject == 'election-group':
         election_groups = models.ElectionGroup.objects.all()
@@ -335,7 +386,7 @@ def _get_show_buttons(subject, eg_id, ea_id, pa_id):
     elif subject == 'promise':
         promises = models.Promise.objects.filter(participation__id=pa_id)
         items = promises
-        levels = [eg_id, ea_id]
+        levels = [eg_id, ea_id, pa_id]
     else:
         raise
 
@@ -349,8 +400,11 @@ def _get_show_buttons(subject, eg_id, ea_id, pa_id):
 
     return buttons
 
+
 def _get_show_inputs(subject, path, session, eg_id, ea_id, pa_id):
     if subject == 'election-group':
+        target = '大選'
+        links = []
         items = [
             {
                 'explicit': True,
@@ -372,6 +426,8 @@ def _get_show_inputs(subject, path, session, eg_id, ea_id, pa_id):
             },
         ]
     elif subject == 'election-activity':
+        target = '地方選舉'
+        links = []
         items = [
             {
                 'explicit': False,
@@ -392,6 +448,8 @@ def _get_show_inputs(subject, path, session, eg_id, ea_id, pa_id):
             },
         ]
     elif subject == 'candidate':
+        target = '候選人'
+        links = []
         items = [
             {
                 'explicit': False,
@@ -418,6 +476,15 @@ def _get_show_inputs(subject, path, session, eg_id, ea_id, pa_id):
             },
         ]
     elif subject == 'promise':
+        target = '政見'
+        references = models.Reference.objects.filter(participation__id=pa_id)
+        links = []
+        for reference in references:
+            link = {
+                'display': '選舉公報',
+                'url': reference.url,
+            }
+            links.append(link)
         items = [
             {
                 'explicit': False,
@@ -435,6 +502,7 @@ def _get_show_inputs(subject, path, session, eg_id, ea_id, pa_id):
                 'name': 'content',
                 'title': '內容',
                 'placeholder': '可以詳細一點',
+                'textarea': True,
             },
         ]
     else:
@@ -449,6 +517,8 @@ def _get_show_inputs(subject, path, session, eg_id, ea_id, pa_id):
     inputs = {
         'subject': subject,
         'redirect': path,
+        'target': target,
+        'links': links,
         'list': items,
     }
 
