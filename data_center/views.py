@@ -201,10 +201,12 @@ def insert_all(request):
     else:
         raise
 
-    request.session['history'] = {}
-    request.session['history'][subject] = {}
-    for key, value in request.POST.items():
-        request.session['history'][subject][key] = value
+    history_on = False
+    if history_on:
+        request.session['history'] = {}
+        request.session['history'][subject] = {}
+        for key, value in request.POST.items():
+            request.session['history'][subject][key] = value
 
     return redirect(redirect_path)
 
@@ -403,6 +405,7 @@ def _get_show_buttons(subject, eg_id, ea_id, pa_id):
 
 def _get_show_inputs(subject, path, session, eg_id, ea_id, pa_id):
     if subject == 'election-group':
+        enabled = False
         target = '大選'
         links = []
         items = [
@@ -426,6 +429,7 @@ def _get_show_inputs(subject, path, session, eg_id, ea_id, pa_id):
             },
         ]
     elif subject == 'election-activity':
+        enabled = False
         target = '地方選舉'
         links = []
         items = [
@@ -448,6 +452,7 @@ def _get_show_inputs(subject, path, session, eg_id, ea_id, pa_id):
             },
         ]
     elif subject == 'candidate':
+        enabled = False
         target = '候選人'
         links = []
         items = [
@@ -476,6 +481,7 @@ def _get_show_inputs(subject, path, session, eg_id, ea_id, pa_id):
             },
         ]
     elif subject == 'promise':
+        enabled = True
         target = '政見'
         references = models.Reference.objects.filter(participation__id=pa_id)
         links = []
@@ -515,6 +521,7 @@ def _get_show_inputs(subject, path, session, eg_id, ea_id, pa_id):
                 item['history'] = session['history'][subject][name]
 
     inputs = {
+        'enabled': enabled,
         'subject': subject,
         'redirect': path,
         'target': target,

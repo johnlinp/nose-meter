@@ -25,40 +25,42 @@
             {% endfor %}
         </div>
 
-        <div id="horizontal-line">
-            <hr>
-        </div>
+        {% if inputs.enabled %}
+            <div id="horizontal-line">
+                <hr>
+            </div>
 
-        <div id="insert-item">
-            <h4>新增一筆{{ inputs.target }}</h4>
-            {% if inputs.links %}
-                <p>參考資料： 
-                    {% for link in inputs.links %}
-                        <a href="{{ link.url }}" target="_blank">{{ link.display }}</a>
+            <div id="insert-item">
+                <h4>新增一筆{{ inputs.target }}</h4>
+                {% if inputs.links %}
+                    <p>參考資料： 
+                        {% for link in inputs.links %}
+                            <a href="{{ link.url }}" target="_blank">{{ link.display }}</a>
+                        {% endfor %}
+                    </p>
+                {% endif %}
+                <form action="/data/insert" method="post" class="form-group">
+                    <input type="hidden" name="subject" value="{{ inputs.subject }}" />
+                    <input type="hidden" name="redirect" value="{{ inputs.redirect }}" />
+                    {% csrf_token %}
+                    {% for input in inputs.list %}
+                        {% if input.explicit %}
+                            <div class="input-container">
+                                <span class="input-prompt">{{ input.title }}</span>
+                                {% if input.textarea %}
+                                    <textarea name="{{ input.name }}" placeholder="{{ input.placeholder }}" value="{{ input.history }}" rows="5" cols="20" class="form-control"></textarea>
+                                {% else %}
+                                    <input type="text" name="{{ input.name }}" placeholder="{{ input.placeholder }}" value="{{ input.history }}" class="form-control" />
+                                {% endif %}
+                            </div>
+                        {% else %}
+                            <input type="hidden" name="{{ input.name }}" value="{{ input.value }}" />
+                        {% endif %}
                     {% endfor %}
-                </p>
-            {% endif %}
-            <form action="/data/insert" method="post" class="form-group">
-                <input type="hidden" name="subject" value="{{ inputs.subject }}" />
-                <input type="hidden" name="redirect" value="{{ inputs.redirect }}" />
-                {% csrf_token %}
-                {% for input in inputs.list %}
-                    {% if input.explicit %}
-                        <div class="input-container">
-                            <span class="input-prompt">{{ input.title }}</span>
-                            {% if input.textarea %}
-                                <textarea name="{{ input.name }}" placeholder="{{ input.placeholder }}" value="{{ input.history }}" rows="5" cols="20" class="form-control"></textarea>
-                            {% else %}
-                                <input type="text" name="{{ input.name }}" placeholder="{{ input.placeholder }}" value="{{ input.history }}" class="form-control" />
-                            {% endif %}
-                        </div>
-                    {% else %}
-                        <input type="hidden" name="{{ input.name }}" value="{{ input.value }}" />
-                    {% endif %}
-                {% endfor %}
-                <input type="submit" value="送出吧" class="btn btn-primary hand" />
-            </form>
-        </div>
+                    <input type="submit" value="送出吧" class="btn btn-primary hand" />
+                </form>
+            </div>
+        {% endif %}
 
     </body>
 </html>
