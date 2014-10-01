@@ -15,8 +15,49 @@
             <h5>{{ prefix }}</h5>
         </div>
 
-        <div class="promise">
+        <div id="promise">
             <p>{{ promise }}</p>
+        </div>
+
+        <div class="all-tags">
+            <h5>這一則政見已經有以下的 tags ：</h5>
+            <div id="positive-tags">
+                {% for tag in tags.positive %}
+                    <form action="/data/insert/" method="post">
+                        <input type="hidden" name="subject" value="tag" />
+                        <input type="hidden" name="redirect" value="{{ redirect }}" />
+                        <input type="hidden" name="action" value="delete-exist" />
+                        <input type="hidden" name="tag-id" value="{{ tag.id }}" />
+                        <input type="submit" value="{{ tag.name }}" class="btn btn-inverse hand" />
+                    </form>
+                {% endfor %}
+            </div>
+
+            <h5>如果以下有 tag 適合，請點一下來加入：</h5>
+            <div id="negative-tags">
+                {% for tag in tags.negative %}
+                    <form action="/data/insert/" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="subject" value="tag" />
+                        <input type="hidden" name="redirect" value="{{ redirect }}" />
+                        <input type="hidden" name="action" value="add-exist" />
+                        <input type="hidden" name="tag-id" value="{{ tag.id }}" />
+                        <input type="submit" value="{{ tag.name }}" class="btn btn-default hand dark-words" />
+                    </form>
+                {% endfor %}
+            </div>
+
+            <h5>或是可以加入一個新的 tag ：</h5>
+            <div id="negative-tags">
+                <form action="/data/insert/" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="subject" value="tag" />
+                    <input type="hidden" name="redirect" value="{{ redirect }}" />
+                    <input type="hidden" name="action" value="add-new" />
+                    <input type="text" class="form-control" placeholder="請輸入新 tag" />
+                    <input type="submit" value="送出吧" class="btn btn-primary hand" />
+                </form>
+            </div>
         </div>
     </body>
 </html>

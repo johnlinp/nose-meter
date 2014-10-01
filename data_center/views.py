@@ -38,10 +38,43 @@ def show_promise(request, eg_id, ea_id, pa_id, pr_id):
     promise = models.Promise.objects.get(id=pr_id)
     subject = 'end'
     prefix = _get_show_prefix(subject, eg_id, ea_id, pa_id)
+    positive_tags = [
+        {
+            'id': 1,
+            'name': '教育',
+        },
+        {
+            'id': 2,
+            'name': '資訊',
+        },
+    ]
+
+    negative_tags = [
+        {
+            'id': 4,
+            'name': '水利',
+        },
+        {
+            'id': 5,
+            'name': '幼福',
+        },
+        {
+            'id': 6,
+            'name': '建設',
+        },
+    ]
+
+    all_tags = {
+        'positive': positive_tags,
+        'negative': negative_tags,
+    }
+
     args = {
         'title': promise.brief,
         'prefix': prefix,
         'promise': promise.content,
+        'redirect': request.path,
+        'tags': all_tags,
     }
 
     return render(request, 'data-center-promise.html', args)
@@ -212,9 +245,18 @@ def insert_all(request):
 
 
 def show_tmp(request):
+    participations = models.Participation.objects.filter(election_activity__election_group__id=1)
+    items = []
+    for participation in participations:
+        for category in ['學歷', '經歷']:
+            for idx in range(3):
+                item = {
+                    'content': ','.join([participation.candidate.name.encode('utf8'), category, '', '', '']),
+                }
+                items.append(item)
     args = {
-        'title': '',
-        'items': [],
+        'title': '候選人學經歷空白資料',
+        'items': items,
     }
 
     return render(request, 'data-center-tmp.html', args)
@@ -246,8 +288,10 @@ def show_elected(request):
                 participation_id = old_record.id
                 promises = models.Promise.objects.filter(participation=old_record)
                 num_promises = ' (已輸入 {} 條政見)'.format(promises.count()) if promises else ''
+                references = models.Reference.objects.filter(participation=old_record)
+                star = '' if references else '*'
                 record_info = {
-                    'content': group_str + ' - ' + activity_str + num_promises,
+                    'content': star + group_str + ' - ' + activity_str + num_promises,
                     'link': '/data/{}/{}/{}'.format(group_id, activity_id, participation_id),
                 }
                 candidate_info['records'].append(record_info)

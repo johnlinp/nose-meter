@@ -54,3 +54,10 @@ class Reference(models.Model):
     participation = models.ForeignKey(Participation)
     url = models.TextField()
 
+class Tag(models.Model):
+    name = models.TextField()
+
+class HasTag(models.Model):
+    promise = models.ForeignKey(Promise)
+    tag = models.ForeignKey(Tag)
+

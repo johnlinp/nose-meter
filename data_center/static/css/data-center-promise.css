@@ -2,12 +2,29 @@ body {
     text-align: center;
 }
 
-.promise {
+#promise {
     background: #CCCCCC;
     border-radius: 9px;
     margin: 0 auto;
     margin-top: 30px;
     width: 500px;
     padding: 50px 100px;
+}
+
+#positive-tags, #negative-tags {
+    margin: 0 auto;
+    width: 500px;
+}
+
+.hand {
+    cursor: pointer;
+}
+
+.dark-words {
+    color: #34495e;
+}
+
+form {
+    display: inline-block;
 }
 
