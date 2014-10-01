@@ -21,7 +21,7 @@
                     <a class="btn btn-primary" href="/data/{{ button.levels }}/">{{ button.name }}</a>
                 </div>
             {% empty %}
-                <div class="no-data">目前沒有資料</div>
+                <div class="no-data">目前還沒有{{ inputs.target }}耶…</div>
             {% endfor %}
         </div>
 
@@ -31,15 +31,15 @@
             </div>
 
             <div id="insert-item">
-                <h4>新增一筆{{ inputs.target }}</h4>
+                <h4>請幫忙新增一筆{{ inputs.target }}!</h4>
                 {% if inputs.links %}
-                    <p>參考資料： 
+                    <p>參考資料：
                         {% for link in inputs.links %}
                             <a href="{{ link.url }}" target="_blank">{{ link.display }}</a>
                         {% endfor %}
                     </p>
                 {% endif %}
-                <form action="/data/insert" method="post" class="form-group">
+                <form action="/data/insert/" method="post" class="form-group">
                     <input type="hidden" name="subject" value="{{ inputs.subject }}" />
                     <input type="hidden" name="redirect" value="{{ inputs.redirect }}" />
                     {% csrf_token %}
@@ -48,7 +48,7 @@
                             <div class="input-container">
                                 <span class="input-prompt">{{ input.title }}</span>
                                 {% if input.textarea %}
-                                    <textarea name="{{ input.name }}" placeholder="{{ input.placeholder }}" value="{{ input.history }}" rows="5" cols="20" class="form-control"></textarea>
+                                    <textarea name="{{ input.name }}" placeholder="{{ input.placeholder }}" value="{{ input.history }}" class="form-control big-text"></textarea>
                                 {% else %}
                                     <input type="text" name="{{ input.name }}" placeholder="{{ input.placeholder }}" value="{{ input.history }}" class="form-control" />
                                 {% endif %}

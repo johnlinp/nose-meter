@@ -227,12 +227,15 @@ def show_elected(request):
         participations = models.Participation.objects.filter(election_activity=election_activity)
         for participation in participations:
             candidate = participation.candidate
-            old_records = models.Participation.objects.filter(candidate=candidate, result='elected')
+            old_records = models.Participation.objects. \
+                    filter(candidate=candidate, result='elected'). \
+                    order_by('-election_activity__election_group__vote_date')
             if not old_records:
                 continue
 
             candidate_info = {
                 'name': candidate.name,
+                'district': participation.election_activity.district.name.encode('utf8'),
                 'records': [],
             }
             for old_record in old_records:
@@ -241,8 +244,10 @@ def show_elected(request):
                 group_id = old_record.election_activity.election_group.id
                 activity_id = old_record.election_activity.id
                 participation_id = old_record.id
+                promises = models.Promise.objects.filter(participation=old_record)
+                num_promises = ' (已輸入 {} 條政見)'.format(promises.count()) if promises else ''
                 record_info = {
-                    'content': group_str + ' - ' + activity_str,
+                    'content': group_str + ' - ' + activity_str + num_promises,
                     'link': '/data/{}/{}/{}'.format(group_id, activity_id, participation_id),
                 }
                 candidate_info['records'].append(record_info)
@@ -374,7 +379,7 @@ def _get_show_prefix(subject, eg_id, ea_id, pa_id):
 
 def _get_show_buttons(subject, eg_id, ea_id, pa_id):
     if subject == 'election-group':
-        election_groups = models.ElectionGroup.objects.all()
+        election_groups = models.ElectionGroup.objects.all().order_by('-vote_date')
         items = election_groups
         levels = []
     elif subject == 'election-activity':

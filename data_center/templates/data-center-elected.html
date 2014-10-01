@@ -3,20 +3,23 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>曾經當選過的市長候選人們</title>
+        <title>曾經當選過的縣市長候選人們</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <link href="{% static "css/flat-ui.css" %}" rel="stylesheet">
         <link href="{% static "css/data-center-elected.css" %}" rel="stylesheet">
     </head>
 
     <body>
-        <h1>曾經當選過的市長候選人們</h1>
+        <h1>曾經當選過的縣市長候選人們</h1>
 
         <div id="content">
             {% for candidate in candidates %}
-                <h3>{{ candidate.name }}</h3>
+                <p class="candidate">
+                    <span class="name">{{ candidate.name }}</span>
+                    <span class="vote-for">這次想選{{ candidate.district }}長</span>
+                </p>
                 {% for record in candidate.records %}
-                    <div><a href="{{ record.link }}">{{ record.content }}</a></div>
+                    <div><a href="{{ record.link }}" target="_blank">{{ record.content }}</a></div>
                 {% endfor %}
             {% endfor %}
         </div>

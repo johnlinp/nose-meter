@@ -4,6 +4,21 @@ h1 {
 
 #content {
     margin: 0 auto;
-    width: 800px;
+    margin-bottom: 50px;
+    width: 600px;
+}
+
+.candidate {
+    margin-top: 50px;
+}
+
+.name {
+    font-weight: bold;
+    font-size: 38px;
+}
+
+.vote-for {
+    font-size: 12px;
+    margin-left: 20px;
 }
 
