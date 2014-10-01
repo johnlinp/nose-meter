@@ -50,7 +50,7 @@
                 <div class="candidate-promises">
                     {% for promise in candidate.promises %}
                         <div class="single-promise">
-                            <div class="small-h4">{{ promise.position }}</div>
+                            <div class="small-h4">{{ promise.brief }} - {{ promise.position }}</div>
                             <div>{{ promise.scores }} {{ promise.progress }}</div>
                             <div>{{ promise.content }}</div>
                         </div>

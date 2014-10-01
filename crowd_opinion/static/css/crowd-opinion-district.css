@@ -53,6 +53,11 @@ body {
 
 .candidate-image {
     max-width: 200px;
-    max-height: 200px;
+    border-radius: 15px 15px 0 0;
+}
+
+.image-container {
+    height: 200px;
+    overflow: hidden;
 }
 

@@ -125,12 +125,12 @@ def insert_all(request):
                     participation = models.Participation.objects.get(
                             candidate=candidate,
                             election_activity=election_activity,
-                            result='elected')
+                            result=models.Participation.ELECTED)
                 except models.Participation.DoesNotExist:
                     participation = models.Participation(
                             candidate=candidate,
                             election_activity=election_activity,
-                            result='elected')
+                            result=models.Participation.ELECTED)
                     participation.save()
 
     elif subject == 'election-activity':
@@ -167,7 +167,7 @@ def insert_all(request):
 
         if candidate_name == '' or candidate_party == '' or participation_result == '':
             return render(request, 'data-center-error.html', {'message': '候選人資料不可以是空白!'})
-        elif participation_result != 'tbd' and participation_result != 'elected':
+        elif participation_result != 'tbd' and participation_result != models.Participation.ELECTED:
             return render(request, 'data-center-error.html', {'message': '投票結果只能是 tbd 或是 elected!'})
 
         election_activity = models.ElectionActivity.objects.get(id=election_activity_id)
@@ -228,7 +228,7 @@ def show_elected(request):
         for participation in participations:
             candidate = participation.candidate
             old_records = models.Participation.objects. \
-                    filter(candidate=candidate, result='elected'). \
+                    filter(candidate=candidate, result=models.Participation.ELECTED). \
                     order_by('-election_activity__election_group__vote_date')
             if not old_records:
                 continue

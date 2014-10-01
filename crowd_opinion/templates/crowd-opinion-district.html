@@ -28,7 +28,7 @@
                 <div id="candidate-group">
                     {% for candidate in candidates %}
                         <div class="candidate clickable" data-click-url="/candidate/{{ candidate.name }}">
-                            <div>
+                            <div class="image-container">
                                 <img class="candidate-image"
                                      src="{% static "images/candidate/"|add:candidate.name %}"
                                      onError="this.onerror=null;this.src='{% static "images/general/candidate-not-found.jpg" %}';"

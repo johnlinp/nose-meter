@@ -37,7 +37,6 @@ body {
 }
 
 .candidate-info {
-    position: fixed;
     float: left;
     margin: 20px;
     padding-bottom: 20px;
