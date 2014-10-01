@@ -18,7 +18,12 @@
         <div id="button-group">
             {% for button in buttons %}
                 <div class="button-container">
-                    <a class="btn btn-primary" href="/data/{{ button.levels }}/">{{ button.name }}</a>
+                    <a class="btn btn-primary"
+                            href="/data/{{ button.levels }}/"
+                            {% ifequal inputs.subject "promise" %}
+                                target="_blank"
+                            {% endifequal %}
+                    >{{ button.name }}</a>
                 </div>
             {% empty %}
                 <div class="no-data">目前還沒有{{ inputs.target }}耶…</div>

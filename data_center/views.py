@@ -36,45 +36,41 @@ def show_all(request, eg_id=None, ea_id=None, pa_id=None):
 
 def show_promise(request, eg_id, ea_id, pa_id, pr_id):
     promise = models.Promise.objects.get(id=pr_id)
-    subject = 'end'
+    promise_info = {
+        'id': promise.id,
+        'content': promise.content,
+    }
+
+    subject = 'tag'
     prefix = _get_show_prefix(subject, eg_id, ea_id, pa_id)
-    positive_tags = [
-        {
-            'id': 1,
-            'name': '教育',
-        },
-        {
-            'id': 2,
-            'name': '資訊',
-        },
-    ]
 
-    negative_tags = [
-        {
-            'id': 4,
-            'name': '水利',
-        },
-        {
-            'id': 5,
-            'name': '幼福',
-        },
-        {
-            'id': 6,
-            'name': '建設',
-        },
-    ]
+    positive_tags_info = []
+    negative_tags_info = []
+    tags = models.Tag.objects.all()
+    positive_has_tags = models.HasTag.objects.filter(promise=promise)
+    positive_tag_ids = [has_tag.tag.id for has_tag in positive_has_tags]
+    for tag in tags:
+        tag_info = {
+            'id': tag.id,
+            'name': tag.name,
+        }
+        if tag.id in positive_tag_ids:
+            positive_tags_info.append(tag_info)
+        else:
+            negative_tags_info.append(tag_info)
 
-    all_tags = {
-        'positive': positive_tags,
-        'negative': negative_tags,
+    all_tags_info = {
+        'positive': positive_tags_info,
+        'negative': negative_tags_info,
     }
 
     args = {
         'title': promise.brief,
         'prefix': prefix,
-        'promise': promise.content,
+        'subject': subject,
+        'promise': promise_info,
         'redirect': request.path,
-        'tags': all_tags,
+        'tags': all_tags_info,
     }
 
     return render(request, 'data-center-promise.html', args)
@@ -231,8 +227,40 @@ def insert_all(request):
 
         promise = models.Promise(participation=participation, brief=promise_brief, content=promise_content)
         promise.save()
+    elif subject == 'tag':
+        promise_id = request.POST['promise-id']
+        promise = models.Promise.objects.get(id=promise_id)
+
+        action = request.POST['action']
+        if action == 'delete-exist' or action == 'add-exist':
+            tag_id = request.POST['tag-id']
+            tag = models.Tag.objects.get(id=tag_id)
+        elif action == 'add-new':
+            tag_name = request.POST['tag-name'].strip()
+            try:
+                tag = models.Tag.objects.get(name=tag_name)
+            except models.Tag.DoesNotExist:
+                tag = models.Tag(name=tag_name)
+                tag.save()
+        else:
+            raise Exception('Unsupported tag action')
+
+        if action == 'delete-exist':
+            try:
+                has_tag = models.HasTag.objects.get(tag=tag, promise=promise)
+                has_tag.delete()
+            except models.HasTag.DoesNotExist:
+                pass
+        elif action == 'add-exist' or action == 'add-new':
+            try:
+                has_tag = models.HasTag.objects.get(tag=tag, promise=promise)
+            except models.HasTag.DoesNotExist:
+                has_tag = models.HasTag(tag=tag, promise=promise)
+                has_tag.save()
+        else:
+            raise Exception('Unsupported tag action')
     else:
-        raise
+        raise Exception('Unsupported subject')
 
     history_on = False
     if history_on:
@@ -410,7 +438,7 @@ def _get_show_prefix(subject, eg_id, ea_id, pa_id):
         election_group = models.ElectionGroup.objects.get(id=eg_id)
         election_activity = models.ElectionActivity.objects.get(id=ea_id)
         prefix = str(election_group) + ' - ' + str(election_activity)
-    elif subject == 'end':
+    elif subject == 'tag':
         election_group = models.ElectionGroup.objects.get(id=eg_id)
         election_activity = models.ElectionActivity.objects.get(id=ea_id)
         participation = models.Participation.objects.get(id=pa_id)
