@@ -13,7 +13,8 @@ body {
 }
 
 #content {
-    text-align: center;
+    width: 600px;
+    margin: 0 auto;
 }
 
 #title-hline {
@@ -35,5 +36,21 @@ body {
 .wide-space {
     display: inline-block;
     width: 16px;
+}
+
+#page-title {
+    text-align: center;
+}
+
+.stars {
+    color: #E67E22;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.status {
+    color: #D35400;
+    font-size: 24px;
+    margin-left: 20px;
 }
 
