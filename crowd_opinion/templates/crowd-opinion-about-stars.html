@@ -1,0 +1,32 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>真度計 - {{ district_name }}</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <link href="{% static "css/flat-ui.css" %}" rel="stylesheet">
+        <link href="{% static "css/crowd-opinion-about-stars.css" %}" rel="stylesheet">
+    </head>
+
+    <body>
+        <div id="whole">
+            <div id="title" class="clickable" data-click-url="/">
+                <div>
+                    <span class="small-h1">真度計</span>
+                    <span class="wide-space"></span>
+                    <span class="small-h4">政見支票別亂開，我們都在看。</span>
+                </div>
+                <div>
+                    <hr id="title-hline">
+                </div>
+            </div>
+
+            <div id="content">
+            </div>
+        </div>
+
+        <script src="{% static "js/d3.v3.min.js" %}"></script>
+        <script src="{% static "js/common-tools.js" %}"></script>
+    </body>
+</html>

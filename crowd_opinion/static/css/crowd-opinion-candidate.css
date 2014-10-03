@@ -27,7 +27,7 @@ body {
 }
 
 .small-h4 {
-    font-size: 26px;
+    font-size: 22px;
     font-weight: bold;
 }
 
@@ -62,6 +62,27 @@ body {
 }
 
 .single-promise {
-    margin-top: 40px;
+    margin-top: 10px;
+    margin-left: 50px;
+}
+
+.single-experience {
+    margin-bottom: 30px;
+}
+
+.promise-stars, #what-stars {
+    color: #E67E22;
+}
+
+.promise-content, .promise-status, .promise-progress {
+    display: none;
+}
+
+.promise-status, .promise-progress {
+    color: #D35400;
+}
+
+#what-stars {
+    font-size: 20px;
 }
 
