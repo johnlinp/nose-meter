@@ -3,7 +3,9 @@
 import re
 import subprocess
 import datetime
+import json
 from bs4 import BeautifulSoup
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.shortcuts import redirect
 from data_center import models
@@ -607,4 +609,44 @@ def _get_show_inputs(subject, path, session, eg_id, ea_id, pa_id):
     }
 
     return inputs
+
+def api_elected(request):
+    election_activities = models.ElectionActivity.objects.filter(election_group__id=1)
+    candidate_info_list = []
+    for election_activity in election_activities:
+        participations = models.Participation.objects.filter(election_activity=election_activity)
+        for participation in participations:
+            candidate = participation.candidate
+            old_records = models.Participation.objects. \
+                    filter(candidate=candidate, result=models.Participation.ELECTED). \
+                    order_by('-election_activity__election_group__vote_date')
+            if not old_records:
+                continue
+
+            candidate_info = {
+                'name': candidate.name,
+                'district': participation.election_activity.district.name.encode('utf8'),
+                'records': [],
+            }
+            for old_record in old_records:
+                promises = models.Promise.objects.filter(participation=old_record)
+                election_activity = old_record.election_activity
+                election_group = election_activity.election_group
+                record_info = {
+                    'election-group': election_group.name,
+                    'vote-date': str(election_group.vote_date),
+                    'district': election_activity.district.name.encode('utf8'),
+                    'target': election_activity.target.encode('utf8'),
+                    'promises': [
+                        {
+                            'brief': promise.brief.encode('utf8'),
+                            'content': promise.content.encode('utf8'),
+                        }
+                        for promise in promises
+                    ],
+                }
+                candidate_info['records'].append(record_info)
+            candidate_info_list.append(candidate_info)
+
+    return HttpResponse(json.dumps(candidate_info_list), content_type='application/json')
 

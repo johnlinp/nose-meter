@@ -106,7 +106,6 @@ def candidate(request, candidate_name):
         'party': candidate.party,
         'educations': educations,
         'experiences': experiences,
-        'promises': promises_info,
     }
 
     args = {

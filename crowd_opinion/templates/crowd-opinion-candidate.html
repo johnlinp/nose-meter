@@ -48,7 +48,11 @@
                     </div>
                 </div>
                 <div class="candidate-promises">
-                    <h2>歷任政見 <a id="what-stars" href="/about/stars/" target="_blank">這些星號代表什麼意思？</a></h2>
+                    <h2>歷任政見
+                        {% if candidate.experiences %}
+                            <a id="what-stars" href="/about/stars/" target="_blank">這些星號代表什麼意思？</a>
+                        {% endif %}
+                    </h2>
                     {% for experience in candidate.experiences %}
                         <div class="single-experience">
                             <h4>{{ experience.name }}</h4>
