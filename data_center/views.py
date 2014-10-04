@@ -650,3 +650,41 @@ def api_elected(request):
 
     return HttpResponse(json.dumps(candidate_info_list), content_type='application/json')
 
+def api_all(request):
+    election_groups = models.ElectionGroup.objects.all()
+    election_groups_info = []
+    for election_group in election_groups:
+        election_activities = models.ElectionActivity.objects.filter(election_group=election_group)
+        election_activities_info = []
+        for election_activity in election_activities:
+            participations = models.Participation.objects.filter(election_activity=election_activity)
+            participations_info = []
+            for participation in participations:
+                promises = models.Promise.objects.filter(participation=participation)
+                promises_info = []
+                for promise in promises:
+                    promise_info = {
+                        'brief': promise.brief.encode('utf8'),
+                        'content': promise.content.encode('utf8'),
+                    }
+                    promises_info.append(promise_info)
+                participation_info = {
+                    'promises': promises_info,
+                    'candidate': participation.candidate.name.encode('utf8'),
+                    'result': participation.result.encode('utf8'),
+                }
+                participations_info.append(participation_info)
+            election_activity_info = {
+                'participations': participations_info,
+                'district': election_activity.district.name.encode('utf8'),
+                'target': election_activity.target.encode('utf8'),
+            }
+            election_activities_info.append(election_activity_info)
+        election_group_info = {
+            'election-activities': election_activities_info,
+            'name': election_group.name.encode('utf8'),
+            'vote-date': str(election_group.vote_date),
+        }
+        election_groups_info.append(election_group_info)
+    return HttpResponse(json.dumps(election_groups_info), content_type='application/json')
+
