@@ -264,9 +264,9 @@ def insert_all(request):
     else:
         raise Exception('Unsupported subject')
 
+    request.session['history'] = {}
     history_on = False
     if history_on:
-        request.session['history'] = {}
         request.session['history'][subject] = {}
         for key, value in request.POST.items():
             request.session['history'][subject][key] = value

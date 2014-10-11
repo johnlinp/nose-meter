@@ -90,3 +90,8 @@ body {
     font-size: 20px;
 }
 
+.warning {
+    font-weight: bold;
+    color: #E74C3C;
+}
+
