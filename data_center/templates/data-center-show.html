@@ -10,12 +10,62 @@
     </head>
 
     <body>
-        <h1>{{ title }}</h1>
+        <div id="header">
+            <h1>{{ title }}</h1>
+            <h5>{{ prefix }}</h5>
+        </div>
 
         <div id="button-group">
             {% for button in buttons %}
-                <div class="button"><a class="btn btn-primary" href="/data/{{ button.levels }}/">{{ button.name }}</a></div>
+                <div class="button-container">
+                    <a class="btn btn-primary"
+                            href="/data/{{ button.levels }}/"
+                            {% ifequal inputs.subject "promise" %}
+                                target="_blank"
+                            {% endifequal %}
+                    >{{ button.name }}</a>
+                </div>
+            {% empty %}
+                <div class="no-data">目前還沒有{{ inputs.target }}耶…</div>
             {% endfor %}
-        </table>
+        </div>
+
+        {% if inputs.enabled %}
+            <div id="horizontal-line">
+                <hr>
+            </div>
+
+            <div id="insert-item">
+                <h4>請幫忙新增一筆{{ inputs.target }}!</h4>
+                {% if inputs.links %}
+                    <p>參考資料：
+                        {% for link in inputs.links %}
+                            <a href="{{ link.url }}" target="_blank">{{ link.display }}</a>
+                        {% endfor %}
+                    </p>
+                {% endif %}
+                <form action="/data/insert/" method="post" class="form-group">
+                    <input type="hidden" name="subject" value="{{ inputs.subject }}" />
+                    <input type="hidden" name="redirect" value="{{ inputs.redirect }}" />
+                    {% csrf_token %}
+                    {% for input in inputs.list %}
+                        {% if input.explicit %}
+                            <div class="input-container">
+                                <span class="input-prompt">{{ input.title }}</span>
+                                {% if input.textarea %}
+                                    <textarea name="{{ input.name }}" placeholder="{{ input.placeholder }}" value="{{ input.history }}" class="form-control big-text"></textarea>
+                                {% else %}
+                                    <input type="text" name="{{ input.name }}" placeholder="{{ input.placeholder }}" value="{{ input.history }}" class="form-control" />
+                                {% endif %}
+                            </div>
+                        {% else %}
+                            <input type="hidden" name="{{ input.name }}" value="{{ input.value }}" />
+                        {% endif %}
+                    {% endfor %}
+                    <input type="submit" value="送出吧" class="btn btn-primary hand" />
+                </form>
+            </div>
+        {% endif %}
+
     </body>
 </html>

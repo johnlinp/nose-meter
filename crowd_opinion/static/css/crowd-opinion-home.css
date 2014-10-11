@@ -1,10 +1,22 @@
 body {
-    background: #ECF0F1;
+    background: #DCE1E1;
     font-family: "Microsoft Jhenghei", "DFKai-sb";
 }
 
 #left {
+    float: left;
     margin-left: 30px;
+    display: inline-block;
+}
+
+#right {
+    float: right;
+}
+
+#county-name {
+    height: 40px;
+    text-align: right;
+    margin-right: 290px;
 }
 
 #paragraph {

@@ -1,0 +1,51 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>真度計 - 完成度星星</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <link href="{% static "css/flat-ui.css" %}" rel="stylesheet">
+        <link href="{% static "css/crowd-opinion-about-stars.css" %}" rel="stylesheet">
+    </head>
+
+    <body>
+        <div id="whole">
+            <div id="title" class="clickable" data-click-url="/">
+                <div>
+                    <span class="small-h1">真度計</span>
+                    <span class="wide-space"></span>
+                    <span class="small-h4">政見支票別亂開，我們都在看。</span>
+                </div>
+                <div>
+                    <hr id="title-hline">
+                </div>
+            </div>
+
+            <div id="content">
+                <h1 id="page-title">完成度星星</h1>
+
+                <p id="preface">
+                    為了方便理解政治支票兌現的進度，我們使用了 "完成度星星" 來標示每一項政見的進展。
+                    這一套標準是基於客觀的認定，包括公文的來往與法案的審查，而非個人主觀的判斷。
+                </p>
+
+                <p>
+                    詳細的星星級別說明如下：
+                </p>
+
+                <p>
+                    <div class="cell"><span class="stars">☆☆☆☆☆</span> <span class="status">沒有任何作為</span></div>
+                    <div class="cell"><span class="stars">★☆☆☆☆</span> <span class="status">已提出提案</span></div>
+                    <div class="cell"><span class="stars">★★☆☆☆</span> <span class="status">提案已交付審查</span></div>
+                    <div class="cell"><span class="stars">★★★☆☆</span> <span class="status">提案已通過審查</span></div>
+                    <div class="cell"><span class="stars">★★★★☆</span> <span class="status">法案已開始實行</span></div>
+                    <div class="cell"><span class="stars">★★★★★</span> <span class="status">法案已完成</span></div>
+                </p>
+            </div>
+        </div>
+
+        <script src="{% static "js/d3.v3.min.js" %}"></script>
+        <script src="{% static "js/common-tools.js" %}"></script>
+    </body>
+</html>

@@ -1,0 +1,63 @@
+body {
+    background: #DCE1E1;
+    font-family: "Microsoft Jhenghei", "DFKai-sb";
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+#whole {
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+#content {
+    text-align: center;
+}
+
+#title-hline {
+    border: 0;
+    height: 2px;
+    background-color: #34495E;
+}
+
+.small-h1 {
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.small-h4 {
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.wide-space {
+    display: inline-block;
+    width: 16px;
+}
+
+#candidate-group {
+    margin: 0 auto;
+    width: 900px;
+}
+
+.candidate {
+    float: left;
+    margin: 20px;
+    padding: 20px;
+    width: 200px;
+    background: #FCFCFC;
+    border-radius: 15px;
+}
+
+.candidate-image {
+    max-width: 200px;
+    border-radius: 15px 15px 0 0;
+}
+
+.image-container {
+    height: 200px;
+    overflow: hidden;
+}
+
