@@ -43,7 +43,7 @@
             })
             .on('click', function(d) {
                 console.log(d);
-                location.href = '/district/' + d.properties.name;
+                location.href = 'district.html#' + d.properties.name;
             });
     };
 

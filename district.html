@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html ng-app="noseMeter" ng-controller="district">
+    <head>
+        <title>真度計 - {{ districtName }}</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <link href="css/flat-ui.css" rel="stylesheet">
+        <link href="css/district.css" rel="stylesheet">
+    </head>
+
+    <body>
+        <div id="whole">
+            <div id="title" class="clickable" data-click-url="/">
+                <div>
+                    <span class="small-h1">真度計</span>
+                    <span class="wide-space"></span>
+                    <span class="small-h4">政見支票別亂開，我們都在看。</span>
+                </div>
+                <div>
+                    <hr id="title-hline">
+                </div>
+            </div>
+
+            <div id="content">
+                <h1>{{ districtName }}</h1>
+
+                <div id="candidate-group">
+                    <div class="candidate clickable"
+                         data-click-url="candidate.html#{{ candidate.name }}"
+                         ng-repeat="candidate in candidates">
+                        <div class="image-container">
+                            <img class="candidate-image"
+                                 src="images/candidate/{{ candidate.name }}"
+                                 err-src="images/general/candidate-not-found.jpg"
+                                 />
+                        </div>
+                        <div><b>{{ candidate.name }}</b></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="js/jquery-2.1.1.min.js"></script>
+        <script src="js/angular.min.js"></script>
+        <script src="js/firebase.js"></script>
+        <script src="js/angularfire.min.js"></script>
+        <script src="js/district.js"></script>
+        <script src="js/common-tools.js"></script>
+    </body>
+</html>
