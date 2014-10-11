@@ -1,12 +1,10 @@
-{% load staticfiles %}
-
 <!DOCTYPE html>
 <html>
     <head>
         <title>真度計</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <link href="{% static "css/flat-ui.css" %}" rel="stylesheet">
-        <link href="{% static "css/crowd-opinion-home.css" %}" rel="stylesheet">
+        <link href="css/flat-ui.css" rel="stylesheet">
+        <link href="css/index.css" rel="stylesheet">
     </head>
 
     <body>
@@ -40,8 +38,11 @@
             <svg id="taiwan"></svg>
         </div>
 
-        <script src="{% static "js/d3.v3.min.js" %}"></script>
-        <script src="{% static "js/topojson.v1.min.js" %}"></script>
-        <script src="{% static "js/crowd-opinion-home.js" %}"></script>
+        <script src="js/d3.v3.min.js"></script>
+        <script src="js/topojson.v1.min.js"></script>
+        <script src="js/angular.min.js"></script>
+        <script src="js/firebase.js"></script>
+        <script src="js/angularfire.min.js"></script>
+        <script src="js/index.js"></script>
     </body>
 </html>

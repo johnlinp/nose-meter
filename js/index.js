@@ -1,6 +1,6 @@
 (function() {
     var loadTaiwan = function() {
-        d3.json('/static/data/tw.json', function(data) {
+        d3.json('data/tw.json', function(data) {
             adjustTaiwanSize();
 
             var topo = topojson.feature(data, data.objects.counties);
