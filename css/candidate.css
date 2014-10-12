@@ -1,0 +1,88 @@
+#whole {
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+#content {
+}
+
+#title-hline {
+    border: 0;
+    height: 2px;
+    background-color: #34495E;
+}
+
+.small-h1 {
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.small-h4 {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.wide-space {
+    display: inline-block;
+    width: 16px;
+}
+
+.candidate-info {
+    float: left;
+    margin: 20px;
+    padding-bottom: 20px;
+    width: 350px;
+    background: #FCFCFC;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.candidate-promises {
+    position: absolute;
+    left: 450px;
+    padding-right: 30px;
+}
+
+.candidate-image {
+    max-width: 250px;
+    max-height: 300px;
+}
+
+.candidate-educations, .candidate-experiences {
+    margin-top: 30px;
+}
+
+.single-promise {
+    margin-top: 10px;
+    margin-left: 50px;
+}
+
+.single-experience {
+    margin-bottom: 30px;
+}
+
+.promise-brief {
+    margin-right: 20px;
+}
+
+.promise-stars, #what-stars {
+    color: #E67E22;
+}
+
+.promise-content, .promise-status, .promise-progress {
+    display: none;
+}
+
+.promise-status, .promise-progress {
+    color: #D35400;
+}
+
+#what-stars {
+    font-size: 20px;
+}
+
+.warning {
+    font-weight: bold;
+    color: #E74C3C;
+}
+

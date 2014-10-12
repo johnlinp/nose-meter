@@ -4,12 +4,13 @@
         <title>真度計 - {{ districtName }}</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <link href="css/flat-ui.css" rel="stylesheet">
+        <link href="css/common.css" rel="stylesheet">
         <link href="css/district.css" rel="stylesheet">
     </head>
 
     <body>
         <div id="whole">
-            <div id="title" class="clickable" data-click-url="/">
+            <div id="title" class="hand" ng-click="gotoUrl($event)" data-click-url="/nose-meter/">
                 <div>
                     <span class="small-h1">真度計</span>
                     <span class="wide-space"></span>
@@ -24,12 +25,13 @@
                 <h1>{{ districtName }}</h1>
 
                 <div id="candidate-group">
-                    <div class="candidate clickable"
+                    <div class="candidate hand"
                          data-click-url="candidate.html#{{ candidate.name }}"
+                         ng-click="gotoUrl($event)"
                          ng-repeat="candidate in candidates">
                         <div class="image-container">
                             <img class="candidate-image"
-                                 src="images/candidate/{{ candidate.name }}"
+                                 ng-src="images/candidate/{{ candidate.name }}"
                                  err-src="images/general/candidate-not-found.jpg"
                                  />
                         </div>
@@ -39,11 +41,9 @@
             </div>
         </div>
 
-        <script src="js/jquery-2.1.1.min.js"></script>
         <script src="js/angular.min.js"></script>
         <script src="js/firebase.js"></script>
         <script src="js/angularfire.min.js"></script>
         <script src="js/district.js"></script>
-        <script src="js/common-tools.js"></script>
     </body>
 </html>

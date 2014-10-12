@@ -15,6 +15,10 @@
                 name: '李進順',
             },
         ];
+        $scope.gotoUrl = function(evt) {
+            var url = evt.currentTarget.getAttribute('data-click-url');
+            location.href = url;
+        };
     });
 
     app.directive('errSrc', function() {

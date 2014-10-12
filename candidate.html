@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html ng-app="noseMeter" ng-controller="candidate">
+    <head>
+        <title>真度計 - {{ candidate.name }}</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <link href="css/flat-ui.css" rel="stylesheet">
+        <link href="css/common.css" rel="stylesheet">
+        <link href="css/candidate.css" rel="stylesheet">
+    </head>
+
+    <body>
+        <div id="whole">
+            <div id="title" class="hand" ng-click="gotoUrl($event)" data-click-url="/nose-meter/">
+                <div>
+                    <span class="small-h1">真度計</span>
+                    <span class="wide-space"></span>
+                    <span class="small-h4">政見支票別亂開，我們都在看。</span>
+                </div>
+                <div>
+                    <hr id="title-hline">
+                </div>
+            </div>
+
+            <div id="content">
+                <div class="candidate-info">
+                    <h1>{{ candidate.name }}</h1>
+                    <div>
+                        <img class="candidate-image"
+                             ng-src="images/candidate/{{ candidate.name }}"
+                             err-src="images/general/candidate-not-found.jpg"
+                             />
+                    </div>
+                    <h4>{{ candidate.party }}</h4>
+                    <div class="candidate-educations">
+                        <div class="small-h4">學歷</div>
+                        <div ng-repeat="education in candidate.educations">{{ education }}</div>
+                    </div>
+                    <div class="candidate-experiences">
+                        <div class="small-h4">曾經選上過</div>
+                        <div ng-repeat="experience in candidate.experiences">{{ experience.name }}</div>
+                        <div ng-show="!candidate.experiences.length">尚無經驗</div>
+                    </div>
+                </div>
+                <div class="candidate-promises">
+                    <h2>歷任政見
+                        <span ng-show="candidate.experiences.length">
+                            <a id="what-stars" href="/about/stars/" target="_blank">這些星號代表什麼意思？</a>
+                        </span>
+                    </h2>
+                    <div class="warning">注意：此處 "完成度" 的資料全部是假的，切勿相信。</div>
+                    <div class="single-experience" ng-repeat="experience in candidate.experiences">
+                        <h4>{{ experience.name }}</h4>
+                        <div class="single-promise" ng-repeat="promise in experience.promises">
+                            <div class="small-h4">
+                                <span class="promise-brief hand">
+                                    <span class="promise-icon fui-radio-checked"></span>
+                                    {{ promise.brief }}
+                                </span>
+                                <span class="promise-stars hand">完成度：{{ promise.scores }}</span>
+                                <span class="promise-status">({{ promise.status }})</span>
+                            </div>
+                            <div class="promise-content">{{ promise.content }}</div>
+                            <div class="promise-progress">
+                                <div ng-repeat="progress in promise.progresses">
+                                    <a href="{{ progress.link }}">{{ progress.target }}</a>：{{ progress.state }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="single-promise" ng-show="!experience.promises.length">
+                            <div class="small-h4">暫時還沒有相關政見</div>
+                        </div>
+                    </div>
+                    <h3 ng-show="!candidate.experiences.length">還沒有當選過</h3>
+                </div>
+            </div>
+        </div>
+
+        <script src="js/angular.min.js"></script>
+        <script src="js/firebase.js"></script>
+        <script src="js/angularfire.min.js"></script>
+        <script src="js/candidate.js"></script>
+    </body>
+</html>
