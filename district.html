@@ -10,7 +10,7 @@
 
     <body>
         <div id="whole">
-            <div id="title" class="hand" ng-click="gotoUrl($event)" data-click-url="/nose-meter/">
+            <div id="title" class="hand" goto-url="/nose-meter/">
                 <div>
                     <span class="small-h1">真度計</span>
                     <span class="wide-space"></span>
@@ -26,8 +26,7 @@
 
                 <div id="candidate-group">
                     <div class="candidate hand"
-                         data-click-url="candidate.html#{{ candidate.name }}"
-                         ng-click="gotoUrl($event)"
+                         goto-url="candidate.html#{{ candidate.name }}"
                          ng-repeat="candidate in candidates">
                         <div class="image-container">
                             <img class="candidate-image"
@@ -45,5 +44,6 @@
         <script src="js/firebase.js"></script>
         <script src="js/angularfire.min.js"></script>
         <script src="js/district.js"></script>
+        <script src="js/common.js"></script>
     </body>
 </html>
