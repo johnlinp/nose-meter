@@ -1,7 +1,0 @@
-default = {
-    'ENGINE': 'django.db.backends.mysql',
-    'NAME': 'NoseMeter',
-    'USER': '',
-    'PASSWORD': '',
-    'HOST': '',
-}
