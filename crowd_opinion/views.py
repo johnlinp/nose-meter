@@ -96,6 +96,8 @@ def candidate(request, candidate_name):
         }
         experiences.append(experience)
 
+    current_participation = models.Participation.objects.get(candidate=candidate, election_activity__election_group=1)
+
     educations = [
         '某某大學某某系',
         '某某大學某某所某某組',
@@ -103,7 +105,7 @@ def candidate(request, candidate_name):
 
     candidate_info = {
         'name': candidate.name,
-        'party': candidate.party,
+        'party': participation.party,
         'educations': educations,
         'experiences': experiences,
     }

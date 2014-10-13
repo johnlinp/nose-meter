@@ -2,7 +2,7 @@ from django.db import models
 
 class Candidate(models.Model):
     name = models.TextField()
-    party = models.TextField()
+    birthday = models.DateField()
 
 class District(models.Model):
     name = models.TextField()
@@ -38,6 +38,7 @@ class Participation(models.Model):
     candidate = models.ForeignKey(Candidate)
     election_activity = models.ForeignKey(ElectionActivity)
     result = models.CharField(max_length=255, choices=RESULT_CHOICES, default=TBD)
+    party = models.TextField()
 
     def __str__(self):
         return self.candidate.name.encode('utf8')

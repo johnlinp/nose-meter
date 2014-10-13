@@ -9,6 +9,8 @@ urlpatterns = patterns('',
 
     url(r'^api/elected/$', 'data_center.views.api_elected'),
     url(r'^api/all/$', 'data_center.views.api_all'),
+    url(r'^api/district-map/$', 'data_center.views.api_all'),
+    url(r'^api/candidate-map/$', 'data_center.views.api_all'),
 
     url(r'^$', 'data_center.views.show_all'),
     url(r'^(?P<eg_id>\d+)/$', 'data_center.views.show_all'),

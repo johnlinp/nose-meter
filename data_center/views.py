@@ -278,12 +278,10 @@ def show_tmp(request):
     participations = models.Participation.objects.filter(election_activity__election_group__id=1)
     items = []
     for participation in participations:
-        for category in ['學歷', '經歷']:
-            for idx in range(3):
-                item = {
-                    'content': ','.join([participation.candidate.name.encode('utf8'), category, '', '', '']),
-                }
-                items.append(item)
+        item = {
+            'content': '{},{}'.format(participation.id, participation.candidate.party.encode('utf8')),
+        }
+        items.append(item)
     args = {
         'title': '候選人學經歷空白資料',
         'items': items,
