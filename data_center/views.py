@@ -686,3 +686,17 @@ def api_all(request):
         election_groups_info.append(election_group_info)
     return HttpResponse(json.dumps(election_groups_info), content_type='application/json')
 
+def api_map(request, target):
+    if target == 'district':
+        items = models.District.objects.all()
+    elif target == 'candidate':
+        items = models.Candidate.objects.all()
+    else:
+        raise Exception('Unsupported map target: {}'.format(target))
+    mapping = {}
+    for item in items:
+        if item.name not in mapping:
+            mapping[item.name] = []
+        mapping[item.name].append(item.id)
+    return HttpResponse(json.dumps(mapping), content_type='application/json')
+
