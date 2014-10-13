@@ -105,7 +105,7 @@ def candidate(request, candidate_name):
 
     candidate_info = {
         'name': candidate.name,
-        'party': participation.party,
+        'party': current_participation.party,
         'educations': educations,
         'experiences': experiences,
     }
