@@ -1,20 +1,16 @@
 (function() {
     var districtName = window.location.hash.substring(1);
+    if(districtName == '') {
+        location.href = '/nose-meter/';
+    }
 
-    angular.module('noseMeter', [])
+    angular.module('noseMeter', ['firebase'])
 
-        .controller('district', function ($scope) {
+        .controller('district', function ($scope, $firebase) {
             $scope.districtName = districtName;
-            $scope.candidates = [
-                {
-                    name: '游錫堃',
-                },
-                {
-                    name: '朱立倫',
-                },
-                {
-                    name: '李進順',
-                },
-            ];
+
+            var ref = new Firebase('https://shining-torch-3460.firebaseio.com/district-info/' + districtName + '/');
+            var sync = $firebase(ref);
+            $scope.candidates = sync.$asObject();
         });
 })();
