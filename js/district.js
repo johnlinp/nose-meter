@@ -1,5 +1,8 @@
 (function() {
     var districtName = window.location.hash.substring(1);
+    if(districtName == '') {
+        location.href = '/nose-meter/';
+    }
 
     angular.module('noseMeter', ['firebase'])
 
