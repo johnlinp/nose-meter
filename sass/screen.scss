@@ -6,10 +6,35 @@
 @import "compass/reset";
 @import "compass/CSS3";
 
+$h1 : 42px;
+
+
 #left {
     float: left;
     margin-left: 30px;
     display: inline-block;
+
+    h1 {
+        font-size: $h1;
+        &.brand {
+            img {
+                display: inline-block;
+                height: $h1*4;
+                @include border-radius(50%);
+            }
+        }
+    }
+
+
+    h4 {
+        margin-top: $h1 * 0.2;
+        margin-left: $h1 * 1;
+        font-size: $h1 * 0.6;  
+    }
+
+    p {
+        line-height: 160%;
+    }
 }
 
 #right {
@@ -22,7 +47,7 @@
     margin-right: 290px;
 }
 
-#paragraph {
+#main {
     margin-top: 50px;
     max-width: 300px;
 }

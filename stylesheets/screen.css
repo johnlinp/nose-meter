@@ -67,32 +67,54 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   display: block;
 }
 
-/* line 9, ../sass/screen.scss */
+/* line 12, ../sass/screen.scss */
 #left {
   float: left;
   margin-left: 30px;
   display: inline-block;
 }
+/* line 17, ../sass/screen.scss */
+#left h1 {
+  font-size: 42px;
+}
+/* line 20, ../sass/screen.scss */
+#left h1.brand img {
+  display: inline-block;
+  height: 168px;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+}
+/* line 29, ../sass/screen.scss */
+#left h4 {
+  margin-top: 8.4px;
+  margin-left: 42px;
+  font-size: 25.2px;
+}
+/* line 35, ../sass/screen.scss */
+#left p {
+  line-height: 160%;
+}
 
-/* line 15, ../sass/screen.scss */
+/* line 40, ../sass/screen.scss */
 #right {
   float: right;
 }
 
-/* line 19, ../sass/screen.scss */
+/* line 44, ../sass/screen.scss */
 #county-name {
   height: 40px;
   text-align: right;
   margin-right: 290px;
 }
 
-/* line 25, ../sass/screen.scss */
-#paragraph {
+/* line 50, ../sass/screen.scss */
+#main {
   margin-top: 50px;
   max-width: 300px;
 }
 
-/* line 30, ../sass/screen.scss */
+/* line 55, ../sass/screen.scss */
 .align-right {
   text-align: right;
 }
