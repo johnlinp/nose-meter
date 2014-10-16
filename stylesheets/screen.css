@@ -67,54 +67,98 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   display: block;
 }
 
-/* line 12, ../sass/screen.scss */
+/* line 13, ../sass/screen.scss */
+body {
+  font-size: 16px;
+}
+
+/* line 17, ../sass/screen.scss */
+#myNav {
+  position: fixed;
+  z-index: 2;
+  display: block;
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHJhZGlhbEdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY3g9IjE4MHB4IiBjeT0iMTgwcHgiIHI9IjE4MCUiPjxzdG9wIG9mZnNldD0iMi43Nzc3OCUiIHN0b3AtY29sb3I9IiMwMGZmZmYiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMxZTkwZmYiLz48L3JhZGlhbEdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyYWQpIiAvPjwvc3ZnPiA=');
+  background-size: 100%;
+  background-image: -moz-radial-gradient(180px 180px, #00ffff 5px, #1e90ff 180px);
+  background-image: -webkit-radial-gradient(180px 180px, #00ffff 5px, #1e90ff 180px);
+  background-image: radial-gradient(180px 180px, #00ffff 5px, #1e90ff 180px);
+  width: 100%;
+  height: 50px;
+}
+/* line 25, ../sass/screen.scss */
+#myNav a {
+  position: absolute;
+  left: 50%;
+}
+/* line 28, ../sass/screen.scss */
+#myNav a img {
+  margin-top: 3px;
+  margin-bottom: 3px;
+  height: 44px;
+  margin-left: -22px;
+}
+
+/* line 38, ../sass/screen.scss */
 #left {
   float: left;
-  margin-left: 30px;
+  margin-top: 50px;
+  margin-left: 50px;
   display: inline-block;
 }
-/* line 17, ../sass/screen.scss */
+/* line 44, ../sass/screen.scss */
 #left h1 {
   font-size: 42px;
 }
-/* line 20, ../sass/screen.scss */
+/* line 46, ../sass/screen.scss */
+#left h1.brand {
+  margin-left: -50px;
+}
+/* line 48, ../sass/screen.scss */
 #left h1.brand img {
   display: inline-block;
   height: 168px;
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
   border-radius: 50%;
+  -webkit-filter: contrast(200%) brightness(88%);
+  filter: contrast(200%) brightness(88%);
 }
-/* line 29, ../sass/screen.scss */
+/* line 58, ../sass/screen.scss */
 #left h4 {
   margin-top: 8.4px;
   margin-left: 42px;
   font-size: 25.2px;
 }
-/* line 35, ../sass/screen.scss */
+/* line 64, ../sass/screen.scss */
 #left p {
   line-height: 160%;
 }
+/* line 66, ../sass/screen.scss */
+#left p i {
+  font-size: 14px;
+  line-height: 100%;
+  text-decoration: italic;
+}
 
-/* line 40, ../sass/screen.scss */
+/* line 74, ../sass/screen.scss */
 #right {
   float: right;
 }
 
-/* line 44, ../sass/screen.scss */
+/* line 78, ../sass/screen.scss */
 #county-name {
   height: 40px;
   text-align: right;
   margin-right: 290px;
 }
 
-/* line 50, ../sass/screen.scss */
+/* line 84, ../sass/screen.scss */
 #main {
   margin-top: 50px;
   max-width: 300px;
 }
 
-/* line 55, ../sass/screen.scss */
+/* line 89, ../sass/screen.scss */
 .align-right {
   text-align: right;
 }
