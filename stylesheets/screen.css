@@ -139,30 +139,31 @@ body {
 #left p {
   line-height: 160%;
 }
-/* line 70, ../sass/screen.scss */
-#left p i {
-  font-size: 14px;
-  line-height: 100%;
-  text-decoration: italic;
-}
-/* line 78, ../sass/screen.scss */
+/* line 74, ../sass/screen.scss */
 #left #main {
   margin-top: 50px;
   max-width: 300px;
 }
-/* line 83, ../sass/screen.scss */
+/* line 79, ../sass/screen.scss */
 #left .align-right {
   text-align: right;
 }
 
-/* line 88, ../sass/screen.scss */
+/* line 85, ../sass/screen.scss */
+i#line {
+  font-size: 14px;
+  line-height: 100%;
+  text-decoration: italic;
+}
+
+/* line 91, ../sass/screen.scss */
 #right {
   width: 65%;
   float: right;
   height: 800px;
 }
 
-/* line 95, ../sass/screen.scss */
+/* line 98, ../sass/screen.scss */
 #county-name {
   height: 40px;
   text-align: right;
@@ -172,15 +173,25 @@ body {
 }
 
 @media screen and (max-width: 770px) {
-  /* line 108, ../sass/screen.scss */
+  /* line 112, ../sass/screen.scss */
+  .noPhone {
+    display: none;
+  }
+
+  /* line 116, ../sass/screen.scss */
   #left, #right {
     width: 100%;
     float: none;
   }
 
-  /* line 114, ../sass/screen.scss */
+  /* line 121, ../sass/screen.scss */
   .container {
     height: 3000px;
     overflow: auto;
+  }
+
+  /* line 126, ../sass/screen.scss */
+  i#line {
+    font-size: 10px;
   }
 }

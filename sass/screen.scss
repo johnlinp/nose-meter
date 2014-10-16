@@ -67,11 +67,7 @@ body {
 
     p {
         line-height: 160%;
-        i {
-            font-size: 14px;
-            line-height: 100%;
-            text-decoration:italic;
-        }
+        
     }
 
 
@@ -83,6 +79,13 @@ body {
     .align-right {
         text-align: right;
     }
+}
+
+
+i#line {
+    font-size: 14px;
+    line-height: 100%;
+    text-decoration:italic;
 }
 
 #right {
@@ -105,15 +108,23 @@ body {
 
 
 @media screen and (max-width:770px) {
+
+    .noPhone {
+        display:none;
+    }
+
     #left, #right {
         width : 100%;
         float: none;
     }
 
-
     .container {
         height: 3000px;
         overflow: auto;
+    }
+
+    i#line {
+        font-size: 10px;
     }
 }
 
