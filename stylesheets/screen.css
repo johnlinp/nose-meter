@@ -179,7 +179,12 @@ body {
   }
 
   /* line 113, ../sass/screen.scss */
+  #right {
+    height: 2000px;
+  }
+
+  /* line 117, ../sass/screen.scss */
   body {
-    height: 1650px;
+    height: 3000px;
   }
 }
