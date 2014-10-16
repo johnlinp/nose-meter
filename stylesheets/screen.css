@@ -151,16 +151,17 @@ body {
 #county-name {
   height: 40px;
   text-align: right;
-  margin-right: 290px;
+  margin-top: 5px;
+  margin-right: 20%;
 }
 
-/* line 86, ../sass/screen.scss */
+/* line 87, ../sass/screen.scss */
 #main {
   margin-top: 50px;
   max-width: 300px;
 }
 
-/* line 91, ../sass/screen.scss */
+/* line 92, ../sass/screen.scss */
 .align-right {
   text-align: right;
 }
