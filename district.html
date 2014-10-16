@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html ng-app="noseMeter" ng-controller="district">
     <head>
-        <title>真度計 - {{ districtName }}</title>
+        <title ng-bind-template = "真度計 - {{ districtName }}"></title>
+        
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <link href="stylesheets/flat-ui.css" rel="stylesheet">
         <link href="stylesheets/common.css" rel="stylesheet">
@@ -22,7 +23,7 @@
             </div>
 
             <div id="content">
-                <h1>{{ districtName }}</h1>
+                <h1 ng-bind = "districtName"></h1>
 
                 <div id="candidate-group">
                     <div class="candidate hand"
@@ -34,7 +35,7 @@
                                  err-src="images/general/candidate-not-found.jpg"
                                  />
                         </div>
-                        <div><b>{{ candidate.name }}</b></div>
+                        <div><b ng-bind = "candidate.name"></b></div>
                     </div>
                 </div>
             </div>
