@@ -1,54 +1,176 @@
-/*
-Error: Invalid CSS after "@media screen and ": expected media expression (e.g. (min-device-width: 800px)), was "max-width(620px) {"
-        on line 100 of /Users/imac/Documents/nose-meter/sass/screen.scss
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+/* line 5, ../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
 
-95:     text-align: right;
-96: }
-97: 
-98: 
-99: 
-100: @media screen and max-width(620px) {
-101:     #left, #right {
-102:     width : 100%;
-103:     float: none;
-104: }
-105: 
+/* line 22, ../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+html {
+  line-height: 1;
+}
 
-Backtrace:
-/Users/imac/Documents/nose-meter/sass/screen.scss:100
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.5/lib/sass/scss/parser.rb:1163:in `expected'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.5/lib/sass/scss/parser.rb:1099:in `expected'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.5/lib/sass/scss/parser.rb:1079:in `expr!'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.5/lib/sass/scss/parser.rb:438:in `media_query'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.5/lib/sass/scss/parser.rb:406:in `media_query_list'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.5/lib/sass/scss/parser.rb:1077:in `expr!'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.5/lib/sass/scss/parser.rb:401:in `media_directive'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.5/lib/sass/scss/parser.rb:219:in `special_directive'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.5/lib/sass/scss/parser.rb:194:in `directive'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.5/lib/sass/scss/parser.rb:660:in `block_child'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.5/lib/sass/scss/parser.rb:653:in `block_contents'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.5/lib/sass/scss/parser.rb:117:in `stylesheet'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.5/lib/sass/scss/parser.rb:42:in `parse'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.5/lib/sass/engine.rb:393:in `_to_tree'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.5/lib/sass/engine.rb:268:in `render'
-/Library/Ruby/Gems/2.0.0/gems/compass-import-once-1.0.5/lib/compass/import-once/engine.rb:17:in `block in render'
-/Library/Ruby/Gems/2.0.0/gems/compass-import-once-1.0.5/lib/compass/import-once/engine.rb:29:in `with_import_scope'
-/Library/Ruby/Gems/2.0.0/gems/compass-import-once-1.0.5/lib/compass/import-once/engine.rb:16:in `render'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.5/lib/sass/plugin/compiler.rb:491:in `update_stylesheet'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.5/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.5/lib/sass/plugin/compiler.rb:209:in `each'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.5/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.5/lib/sass/plugin/compiler.rb:469:in `on_file_changed'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.5/lib/sass/plugin/compiler.rb:328:in `block in watch'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.5/vendor/listen/lib/listen/listener.rb:252:in `call'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.5/vendor/listen/lib/listen/listener.rb:252:in `on_change'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.5/vendor/listen/lib/listen/listener.rb:290:in `block in initialize_adapter'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.5/vendor/listen/lib/listen/adapter.rb:254:in `call'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.5/vendor/listen/lib/listen/adapter.rb:254:in `report_changes'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.5/vendor/listen/lib/listen/adapter.rb:323:in `poll_changed_directories'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.5/vendor/listen/lib/listen/adapter.rb:299:in `block in start_poller'
-*/
-body:before {
-  white-space: pre;
-  font-family: monospace;
-  content: "Error: Invalid CSS after \"@media screen and \": expected media expression (e.g. (min-device-width: 800px)), was \"max-width(620px) {\"\A         on line 100 of /Users/imac/Documents/nose-meter/sass/screen.scss\A \A 95:     text-align: right;\A 96: }\A 97: \A 98: \A 99: \A 100: @media screen and max-width(620px) {\A 101:     #left, #right {\A 102:     width : 100%;\A 103:     float: none;\A 104: }\A 105: "; }
+/* line 24, ../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+  list-style: none;
+}
+
+/* line 26, ../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 28, ../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+/* line 30, ../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+  quotes: none;
+}
+/* line 103, ../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+/* line 32, ../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+a img {
+  border: none;
+}
+
+/* line 116, ../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block;
+}
+
+/* line 13, ../sass/screen.scss */
+body {
+  font-size: 16px;
+}
+
+/* line 17, ../sass/screen.scss */
+#myNav {
+  position: fixed;
+  z-index: 2;
+  display: block;
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHJhZGlhbEdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY3g9IjE4MHB4IiBjeT0iMTgwcHgiIHI9IjE4MCUiPjxzdG9wIG9mZnNldD0iMi43Nzc3OCUiIHN0b3AtY29sb3I9IiMwMGZmZmYiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMxZTkwZmYiLz48L3JhZGlhbEdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyYWQpIiAvPjwvc3ZnPiA=');
+  background-size: 100%;
+  background-image: -moz-radial-gradient(180px 180px, #00ffff 5px, #1e90ff 180px);
+  background-image: -webkit-radial-gradient(180px 180px, #00ffff 5px, #1e90ff 180px);
+  background-image: radial-gradient(180px 180px, #00ffff 5px, #1e90ff 180px);
+  width: 100%;
+  height: 50px;
+}
+/* line 25, ../sass/screen.scss */
+#myNav a {
+  position: absolute;
+  left: 50%;
+}
+/* line 28, ../sass/screen.scss */
+#myNav a img {
+  margin-top: 3px;
+  margin-bottom: 3px;
+  height: 44px;
+  margin-left: -22px;
+}
+
+/* line 38, ../sass/screen.scss */
+#left {
+  float: left;
+  width: 25%;
+  margin-top: 50px;
+  margin-left: 50px;
+  display: inline-block;
+}
+/* line 45, ../sass/screen.scss */
+#left h1 {
+  font-size: 42px;
+}
+/* line 47, ../sass/screen.scss */
+#left h1.brand {
+  margin-left: -50px;
+}
+/* line 49, ../sass/screen.scss */
+#left h1.brand img {
+  display: inline-block;
+  height: 168px;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  -webkit-filter: contrast(200%) brightness(88%);
+  filter: contrast(200%) brightness(88%);
+}
+/* line 59, ../sass/screen.scss */
+#left h4 {
+  margin-top: 8.4px;
+  margin-left: 42px;
+  font-size: 25.2px;
+}
+/* line 65, ../sass/screen.scss */
+#left p {
+  line-height: 160%;
+}
+/* line 67, ../sass/screen.scss */
+#left p i {
+  font-size: 14px;
+  line-height: 100%;
+  text-decoration: italic;
+}
+
+/* line 75, ../sass/screen.scss */
+#right {
+  width: 65%;
+  float: right;
+}
+
+/* line 80, ../sass/screen.scss */
+#county-name {
+  height: 40px;
+  text-align: right;
+  margin-top: 5px;
+  margin-right: 25%;
+  font-size: 26px;
+}
+
+/* line 89, ../sass/screen.scss */
+#main {
+  margin-top: 50px;
+  max-width: 300px;
+}
+
+/* line 94, ../sass/screen.scss */
+.align-right {
+  text-align: right;
+}
+
+@media screen and (max-width: 770px) {
+  /* line 101, ../sass/screen.scss */
+  #left, #right {
+    width: 100%;
+    float: none;
+  }
+}
