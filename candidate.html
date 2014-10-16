@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="noseMeter" ng-controller="candidate">
     <head>
-        <title>真度計 - {{ candidate.name }}</title>
+        <title ng-bind-template = "真度計 - {{ candidate.name }}"></title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <link href="stylesheets/flat-ui.css" rel="stylesheet">
         <link href="stylesheets/common.css" rel="stylesheet">
@@ -29,7 +29,7 @@
 
             <div id="content">
                 <div class="candidate-info">
-                    <h1>{{ candidate.name }}</h1>
+                    <h1 ng-bind = "candidate.name"></h1>
                     <div>
                         <img class="candidate-image"
                              ng-src="images/candidate/{{ candidate.name }}"
@@ -39,11 +39,14 @@
                     <h4>{{ candidate.party }}</h4>
                     <div class="candidate-educations">
                         <div class="small-h4">學歷</div>
-                        <div ng-repeat="education in candidate.educations">{{ education }}</div>
+                        <div ng-repeat="education in candidate.educations" ng-bind = "education"></div>
                     </div>
                     <div class="candidate-experiences">
+
                         <div class="small-h4">曾經選上過</div>
-                        <div ng-repeat="experience in candidate.experiences">{{ experience.name }}</div>
+
+                        <div ng-repeat="experience in candidate.experiences" ng-bind = "experience.name"></div>
+
                         <div ng-show="!candidate.experiences.length">尚無經驗</div>
                     </div>
                 </div>
@@ -55,7 +58,7 @@
                     </h2>
                     <div class="warning">注意：此處 "完成度" 的資料全部是假的，切勿相信。</div>
                     <div class="single-experience" ng-repeat="experience in candidate.experiences">
-                        <h4>{{ experience.name }}</h4>
+                        <h4 ng-bind = "experience.name "></h4>
                         <div class="single-promise" single-promise ng-repeat="promise in experience.promises">
                             <div class="small-h4">
                                 <span class="promise-brief hand">
@@ -68,7 +71,7 @@
                             <div class="promise-content">{{ promise.content }}</div>
                             <div class="promise-progress">
                                 <div ng-repeat="progress in promise.progresses">
-                                    <a href="{{ progress.link }}">{{ progress.target }}</a>：{{ progress.state }}
+                                    <a href="{{ progress.link }}" ng-bind = "progress.target"></a>：{{ progress.state }}
                                 </div>
                             </div>
                         </div>
