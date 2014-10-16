@@ -101,19 +101,20 @@ body {
 /* line 38, ../sass/screen.scss */
 #left {
   float: left;
+  width: 25%;
   margin-top: 50px;
   margin-left: 50px;
   display: inline-block;
 }
-/* line 44, ../sass/screen.scss */
+/* line 45, ../sass/screen.scss */
 #left h1 {
   font-size: 42px;
 }
-/* line 46, ../sass/screen.scss */
+/* line 47, ../sass/screen.scss */
 #left h1.brand {
   margin-left: -50px;
 }
-/* line 48, ../sass/screen.scss */
+/* line 49, ../sass/screen.scss */
 #left h1.brand img {
   display: inline-block;
   height: 168px;
@@ -123,42 +124,43 @@ body {
   -webkit-filter: contrast(200%) brightness(88%);
   filter: contrast(200%) brightness(88%);
 }
-/* line 58, ../sass/screen.scss */
+/* line 59, ../sass/screen.scss */
 #left h4 {
   margin-top: 8.4px;
   margin-left: 42px;
   font-size: 25.2px;
 }
-/* line 64, ../sass/screen.scss */
+/* line 65, ../sass/screen.scss */
 #left p {
   line-height: 160%;
 }
-/* line 66, ../sass/screen.scss */
+/* line 67, ../sass/screen.scss */
 #left p i {
   font-size: 14px;
   line-height: 100%;
   text-decoration: italic;
 }
 
-/* line 74, ../sass/screen.scss */
+/* line 75, ../sass/screen.scss */
 #right {
+  width: 75%;
   float: right;
 }
 
-/* line 78, ../sass/screen.scss */
+/* line 80, ../sass/screen.scss */
 #county-name {
   height: 40px;
   text-align: right;
   margin-right: 290px;
 }
 
-/* line 84, ../sass/screen.scss */
+/* line 86, ../sass/screen.scss */
 #main {
   margin-top: 50px;
   max-width: 300px;
 }
 
-/* line 89, ../sass/screen.scss */
+/* line 91, ../sass/screen.scss */
 .align-right {
   text-align: right;
 }

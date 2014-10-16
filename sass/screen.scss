@@ -37,6 +37,7 @@ body {
 
 #left {
     float: left;
+    width : 25%;
     margin-top: $nav-height;
     margin-left: $nav-height;
     display: inline-block;
@@ -72,6 +73,7 @@ body {
 }
 
 #right {
+    width : 75%;
     float: right;
 }
 
