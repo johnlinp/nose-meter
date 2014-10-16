@@ -34,6 +34,9 @@ body {
     }
 }
 
+.container {
+    overflow: auto;
+}
 
 #left {
     float: left;
@@ -70,11 +73,23 @@ body {
             text-decoration:italic;
         }
     }
+
+
+    #main {
+        margin-top: 50px;
+        max-width: 300px;
+    }
+
+    .align-right {
+        text-align: right;
+    }
 }
 
 #right {
     width : 65%;
     float: right;
+    height : 800px;
+
 }
 
 #county-name {
@@ -86,14 +101,6 @@ body {
 
 }
 
-#main {
-    margin-top: 50px;
-    max-width: 300px;
-}
-
-.align-right {
-    text-align: right;
-}
 
 
 
