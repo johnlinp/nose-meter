@@ -178,13 +178,9 @@ body {
     float: none;
   }
 
-  /* line 113, ../sass/screen.scss */
-  #right {
-    height: 2000px;
-  }
-
-  /* line 117, ../sass/screen.scss */
-  body {
+  /* line 114, ../sass/screen.scss */
+  .container {
     height: 3000px;
+    overflow: auto;
   }
 }

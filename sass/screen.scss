@@ -110,12 +110,10 @@ body {
         float: none;
     }
 
-    #right {
-        height: 2000px;
-    }
 
-    body {
+    .container {
         height: 3000px;
+        overflow: auto;
     }
 }
 
