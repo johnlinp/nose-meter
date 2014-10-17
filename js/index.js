@@ -1,11 +1,20 @@
+angular.module("indexApp",[])
+    .controller("indexCtrl" , myCtrl);
+
+function myCtrl($scope){
+}
+
+
+
 (function() {
     var loadTaiwan = function() {
 
-        /* just for debugg, please simply ignore this */
-         'https://dl.dropboxusercontent.com/u/46636026/data/tw.json'
+        /* just for debug, please simply ignore this */
+//         d3.json('https://dl.dropboxusercontent.com/u/46636026/data/tw.json', function(data) {
         /*  */
 
         d3.json('data/tw.json', function(data) {
+
             adjustTaiwanSize();
 
             var topo = topojson.feature(data, data.objects.counties);

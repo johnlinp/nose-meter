@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app = "indexApp">
     <head>
         <title>真度計</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -9,9 +9,15 @@
           <meta property="og:images" content="images/scales.png">
           <meta property="og:description" content="政見支票別亂開，我們都在看。">
 
-        <link href="stylesheets/flat-ui.css" rel="stylesheet" type="text/css">
-        <link href="stylesheets/common.css" rel="stylesheet" type="text/css">
+<!--        <link href="stylesheets/flat-ui.css" rel="stylesheet" type="text/css">
+
+        <link href="stylesheets/common.css" rel="stylesheet" type="text/css">  -->
+
+
         <link href="stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" >
+
+
+        <link href="stylesheets/print.css" media="print" rel="stylesheet" type="text/css" >
 
           <!--[if IE]>
               <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -19,7 +25,7 @@
 
     </head>
 
-    <body>
+    <body ng-controller = "indexCtrl">
         <nav id = "myNav">
             <span id = "githubLink">
                     <a href ="https://github.com/averangeall/nose-meter/">
@@ -27,77 +33,71 @@
                     <img src = "images/github_icon.png" />
                 </a>
             </span>
-        </div>
+        </nav> <!-- nav End -->
 
-        <div class="container">
+        <div id = "intro-wrapper"
+            ng-click = "start = 1">
 
-            <div id="left">
+            <div id="intro" ng-hide = "start">
                 <h1 class = "brand">
     <!--                真度計 -->
                     <img src="images/scales.png"/>
                 </h1>
                 <p>
-                    當小木偶決定參政時，老木匠告誡他：
+                    當小木偶決定參政時，<br/>老木匠告誡他：
                 </p>
-
                 <h4>
                         政見支票別亂開，<br/>
                         我們都在看。<br/>
                 </h4>
-
-                <div id="main">
-            <!--        <p>
-                        <div>民主的重點並不是 "選賢與能" ，</div>
-                        <div>而是把 "做爛的換掉" 。</div>
-                        <div class="align-right"><i>from 十分鐘搞懂民主</i></div> 
-                    </p>  -->
-
-                    <div class = "noPhone">
+                <div id="main-intro" >
                         <p>
                             誰是做爛的？誰沒在做事？<br/>                    
                             如果在投票所你才想到這個問題，<br/>
                             就太遲了。<br/>
+                            <b class = "divider"></b>
                         </p>
-
-                        <hr/>
-
                         <p>
                             現在就來關心一下年底要投的人，<br/>
                             之前說要做的事情，<br/>
                             有沒有真的做到。<br/>
+                            <b class = "divider"></b>
                         </p>
-
-                        <hr/>
-
                         <p>
                             說謊的，鼻子會變長喔！
+                            <a id ="start"
+                                ng-click ="start = 1">
+                                <b class = "arrowHead right"></b>
+                                進入台灣地圖
+                            </a>
                         </p>
-
-                         <hr/>
-                    </div>
-
-                    <p>
-                        <br/>
-                        <i id = "line">
-                            免責聲明：本網站匯傳既有之資訊，<br/>
-                            內容均非原創，<br/>
-                            也不評價政策的「善」或「美」，<br/>
-                            只統計有沒有「真」的做到。</i>
-                    </p>
+                </div> <!-- main-intro END -->
+            </div> <!-- intro END -->
+        </div> <!-- intro-wrapper END -->
 
 
-                </div>
-            </div>
 
-            <div id="right">
-                <h3 id="county-name"></h3>
-                <svg id="taiwan"></svg>
-            </div>
-        </div>
+        <div id="main-map" ng-show = "start" ng-cloak>
+            <h3 id="county-name"></h3>
+            <svg id="taiwan"></svg>
+        </div> <!-- main-map END -->
+
+
+
+
+        <footer>
+            <a id = "itsOK"
+                ng-hide = "stopBuggingMe"
+                ng-click = "stopBuggingMe = 1">
+                免責聲明：本網站匯傳既有之資訊，內容均非原創，也不評價政策的「善」或「美」，只統計有沒有「真」的做到。</a>
+        </footer>
 
         <script src="js/d3.v3.min.js"></script>
         <script src="js/topojson.v1.min.js"></script>
         <script src="js/jquery-2.1.1.min.js"></script>
+
+        <script src="js/angular.min.js"></script>
+
 
         <script src="js/index.js"></script>
     </body>
