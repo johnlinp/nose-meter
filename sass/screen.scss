@@ -38,6 +38,13 @@ body {
              margin-left: - ($nav-height - 3px *2) / 2;
         }
     }
+
+    #county-name-wrapper {
+        display: inline-block;
+        padding-top:12px;
+        padding-left:15px;
+        width: 320px;
+    }
 }
 
 

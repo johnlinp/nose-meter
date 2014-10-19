@@ -27,6 +27,11 @@
 
     <body ng-controller = "indexCtrl">
         <nav id = "myNav">
+
+            <span id="county-name-wrapper">
+                <span id="county-name"></span>  <!-- d3 link to this ID -->
+            </span>
+
             <span id = "githubLink">
                     <a href ="https://github.com/averangeall/nose-meter/">
 
@@ -35,10 +40,10 @@
             </span>
         </nav> <!-- nav End -->
 
-        <div id = "intro-wrapper"
+        <div id = "intro-wrapper"  ng-hide = "start"
             ng-click = "start = 1">
 
-            <div id="intro" ng-hide = "start">
+            <div id="intro">
                 <h1 class = "brand">
     <!--                真度計 -->
                     <img src="images/scales.png"/>
@@ -78,8 +83,7 @@
 
 
         <div id="main-map" ng-show = "start" ng-cloak>
-            <h3 id="county-name"></h3>
-            <svg id="taiwan"></svg>
+            <svg id="taiwan"></svg>  <!-- d3 link to this ID -->
         </div> <!-- main-map END -->
 
 
@@ -96,7 +100,7 @@
 
         <script src="bower_components/angular/angular.min.js"></script>
         <script src="bower_components/d3/d3.min.js"></script>
-        <script src="bower_components/topojson/topojson.min.js"></script>
+        <script src="bower_components/topojson/topojson.js"></script>
         <script src="bower_components/jquery/dist/jquery.min.js"></script>
             
         <!--   components End -->

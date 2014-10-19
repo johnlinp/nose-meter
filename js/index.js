@@ -9,16 +9,14 @@ function myCtrl($scope){
 (function() {
     var loadTaiwan = function() {
 
-        /* just for debug, please simply ignore this */
+        /* debug only, please simply ignore*/
 //         d3.json('https://dl.dropboxusercontent.com/u/46636026/data/tw.json', function(data) {
         /*  */
 
         d3.json('data/tw.json', function(data) {
 
             adjustTaiwanSize();
-
             var topo = topojson.feature(data, data.objects.counties);
-
             var prj = d3.geo.mercator().center([120.979531, 23.978567]).scale(7800);
             var path = d3.geo.path().projection(prj);
 
@@ -27,7 +25,8 @@ function myCtrl($scope){
     };
 
     var adjustTaiwanSize = function() {
-        var leftWidth = parseFloat(d3.select('#left').style('width').replace('px', ''));
+        var leftWidth = 0;
+        // parseFloat(d3.select('#left').style('width').replace('px', ''));
         d3.select('#taiwan')
             .attr('width', screen.width - leftWidth - 100)
             .attr('height', screen.height - 300);

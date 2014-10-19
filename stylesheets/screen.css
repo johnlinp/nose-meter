@@ -102,8 +102,15 @@ body {
   height: 44px;
   margin-left: -22px;
 }
+/* line 42, ../sass/screen.scss */
+#myNav #county-name-wrapper {
+  display: inline-block;
+  padding-top: 12px;
+  padding-left: 15px;
+  width: 320px;
+}
 
-/* line 45, ../sass/screen.scss */
+/* line 52, ../sass/screen.scss */
 #intro-wrapper {
   border-left: 3px dodgerblue solid;
   position: absolute;
@@ -113,11 +120,11 @@ body {
   padding: 15px;
   z-index: 2;
 }
-/* line 55, ../sass/screen.scss */
+/* line 62, ../sass/screen.scss */
 #intro-wrapper #intro h1 {
   font-size: 42px;
 }
-/* line 58, ../sass/screen.scss */
+/* line 65, ../sass/screen.scss */
 #intro-wrapper #intro h1.brand img {
   display: inline-block;
   height: 168px;
@@ -127,27 +134,27 @@ body {
   -webkit-filter: contrast(200%);
   filter: contrast(200%);
 }
-/* line 68, ../sass/screen.scss */
+/* line 75, ../sass/screen.scss */
 #intro-wrapper #intro h4 {
   margin-top: 21px;
   margin-bottom: 21px;
   margin-left: 42px;
   font-size: 25.2px;
 }
-/* line 75, ../sass/screen.scss */
+/* line 82, ../sass/screen.scss */
 #intro-wrapper #intro p {
   line-height: 160%;
 }
-/* line 78, ../sass/screen.scss */
+/* line 85, ../sass/screen.scss */
 #intro-wrapper #intro p:nth-child(odd) {
   color: red;
 }
-/* line 83, ../sass/screen.scss */
+/* line 90, ../sass/screen.scss */
 #intro-wrapper #intro #start {
   cursor: pointer;
   color: dodgerblue;
 }
-/* line 89, ../sass/screen.scss */
+/* line 96, ../sass/screen.scss */
 #intro-wrapper #intro .divider {
   display: block;
   border-top: 1px solid #0f487f;
@@ -158,7 +165,7 @@ body {
   width: 12%;
 }
 
-/* line 112, ../sass/screen.scss */
+/* line 119, ../sass/screen.scss */
 footer {
   position: fixed;
   text-align: right;
@@ -170,7 +177,7 @@ footer {
   -webkit-animation: runner 20s linear forwards infinite;
   animation: runner 20s linear forwards infinite;
 }
-/* line 122, ../sass/screen.scss */
+/* line 129, ../sass/screen.scss */
 footer #itsOK {
   display: inline-block;
   width: 640px;
@@ -210,13 +217,13 @@ footer #itsOK {
 }
 /* responsive */
 @media screen and (max-width: 770px) {
-  /* line 158, ../sass/screen.scss */
+  /* line 165, ../sass/screen.scss */
   .noPhone {
     display: none;
   }
 }
 /* arrowHeads */
-/* line 167, ../sass/screen.scss */
+/* line 174, ../sass/screen.scss */
 .arrowHead {
   display: inline-block;
   width: 0px;
@@ -225,40 +232,40 @@ footer #itsOK {
   top: -2px;
   left: 8px;
 }
-/* line 177, ../sass/screen.scss */
+/* line 184, ../sass/screen.scss */
 .arrowHead.right, .arrowHead.left {
   border-top: 4px solid transparent;
   border-bottom: 4px solid transparent;
 }
-/* line 181, ../sass/screen.scss */
+/* line 188, ../sass/screen.scss */
 .arrowHead.right {
   border-left: 4px solid black;
 }
-/* line 184, ../sass/screen.scss */
+/* line 191, ../sass/screen.scss */
 .arrowHead.left {
   border-right: 4px solid black;
 }
-/* line 187, ../sass/screen.scss */
+/* line 194, ../sass/screen.scss */
 .arrowHead.up, .arrowHead.down {
   border-left: 4px solid transparent;
   border-right: 4px solid transparent;
 }
-/* line 191, ../sass/screen.scss */
+/* line 198, ../sass/screen.scss */
 .arrowHead.up {
   border-bottom: 4px solid black;
 }
-/* line 194, ../sass/screen.scss */
+/* line 201, ../sass/screen.scss */
 .arrowHead.down {
   border-top: 4px solid black;
 }
 
 /* old */
-/* line 205, ../sass/screen.scss */
+/* line 212, ../sass/screen.scss */
 .container {
   overflow: auto;
 }
 
-/* line 209, ../sass/screen.scss */
+/* line 216, ../sass/screen.scss */
 #left {
   float: left;
   width: 25%;
@@ -266,15 +273,15 @@ footer #itsOK {
   margin-left: 50px;
   display: inline-block;
 }
-/* line 216, ../sass/screen.scss */
+/* line 223, ../sass/screen.scss */
 #left h1 {
   font-size: 42px;
 }
-/* line 218, ../sass/screen.scss */
+/* line 225, ../sass/screen.scss */
 #left h1.brand {
   margin-left: -50px;
 }
-/* line 220, ../sass/screen.scss */
+/* line 227, ../sass/screen.scss */
 #left h1.brand img {
   display: inline-block;
   height: 168px;
@@ -284,34 +291,34 @@ footer #itsOK {
   -webkit-filter: contrast(200%) brightness(88%);
   filter: contrast(200%) brightness(88%);
 }
-/* line 230, ../sass/screen.scss */
+/* line 237, ../sass/screen.scss */
 #left h4 {
   margin-top: 8.4px;
   margin-left: 42px;
   font-size: 25.2px;
 }
-/* line 236, ../sass/screen.scss */
+/* line 243, ../sass/screen.scss */
 #left p {
   line-height: 160%;
 }
-/* line 242, ../sass/screen.scss */
+/* line 249, ../sass/screen.scss */
 #left #main {
   margin-top: 50px;
   max-width: 300px;
 }
-/* line 247, ../sass/screen.scss */
+/* line 254, ../sass/screen.scss */
 #left .align-right {
   text-align: right;
 }
 
-/* line 254, ../sass/screen.scss */
+/* line 261, ../sass/screen.scss */
 #right {
   width: 65%;
   float: right;
   height: 800px;
 }
 
-/* line 261, ../sass/screen.scss */
+/* line 268, ../sass/screen.scss */
 #county-name {
   height: 40px;
   text-align: right;
