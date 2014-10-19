@@ -131,8 +131,8 @@ body {
   -moz-border-radius: 50% 50% 0% 0%;
   -webkit-border-radius: 50%;
   border-radius: 50% 50% 0% 0%;
-  -webkit-filter: contrast(200%);
-  filter: contrast(200%);
+  -webkit-filter: contrast(150%);
+  filter: contrast(150%);
 }
 /* line 75, ../sass/screen.scss */
 #intro-wrapper #intro h4 {
@@ -293,37 +293,35 @@ footer #itsOK {
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
   border-radius: 50%;
-  -webkit-filter: contrast(200%) brightness(88%);
-  filter: contrast(200%) brightness(88%);
 }
-/* line 240, ../sass/screen.scss */
+/* line 239, ../sass/screen.scss */
 #left h4 {
   margin-top: 8.4px;
   margin-left: 42px;
   font-size: 25.2px;
 }
-/* line 246, ../sass/screen.scss */
+/* line 245, ../sass/screen.scss */
 #left p {
   line-height: 160%;
 }
-/* line 252, ../sass/screen.scss */
+/* line 251, ../sass/screen.scss */
 #left #main {
   margin-top: 50px;
   max-width: 300px;
 }
-/* line 257, ../sass/screen.scss */
+/* line 256, ../sass/screen.scss */
 #left .align-right {
   text-align: right;
 }
 
-/* line 264, ../sass/screen.scss */
+/* line 263, ../sass/screen.scss */
 #right {
   width: 65%;
   float: right;
   height: 800px;
 }
 
-/* line 271, ../sass/screen.scss */
+/* line 270, ../sass/screen.scss */
 #county-name {
   height: 40px;
   text-align: right;
