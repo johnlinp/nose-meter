@@ -10,10 +10,10 @@ function myCtrl($scope){
     var loadTaiwan = function() {
 
         /* debug only, please simply ignore*/
-//         d3.json('https://dl.dropboxusercontent.com/u/46636026/data/tw.json', function(data) {
+         d3.json('https://dl.dropboxusercontent.com/u/46636026/data/tw.json', function(data) {
         /*  */
 
-        d3.json('data/tw.json', function(data) {
+//        d3.json('data/tw.json', function(data) {
 
             adjustTaiwanSize();
             var topo = topojson.feature(data, data.objects.counties);

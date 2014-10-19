@@ -165,7 +165,12 @@ body {
   width: 12%;
 }
 
-/* line 119, ../sass/screen.scss */
+/* line 116, ../sass/screen.scss */
+#main-map #taiwan {
+  margin-top: 50px;
+}
+
+/* line 122, ../sass/screen.scss */
 footer {
   position: fixed;
   text-align: right;
@@ -177,7 +182,7 @@ footer {
   -webkit-animation: runner 20s linear forwards infinite;
   animation: runner 20s linear forwards infinite;
 }
-/* line 129, ../sass/screen.scss */
+/* line 132, ../sass/screen.scss */
 footer #itsOK {
   display: inline-block;
   width: 640px;
@@ -217,13 +222,13 @@ footer #itsOK {
 }
 /* responsive */
 @media screen and (max-width: 770px) {
-  /* line 165, ../sass/screen.scss */
+  /* line 168, ../sass/screen.scss */
   .noPhone {
     display: none;
   }
 }
 /* arrowHeads */
-/* line 174, ../sass/screen.scss */
+/* line 177, ../sass/screen.scss */
 .arrowHead {
   display: inline-block;
   width: 0px;
@@ -232,40 +237,40 @@ footer #itsOK {
   top: -2px;
   left: 8px;
 }
-/* line 184, ../sass/screen.scss */
+/* line 187, ../sass/screen.scss */
 .arrowHead.right, .arrowHead.left {
   border-top: 4px solid transparent;
   border-bottom: 4px solid transparent;
 }
-/* line 188, ../sass/screen.scss */
+/* line 191, ../sass/screen.scss */
 .arrowHead.right {
   border-left: 4px solid black;
 }
-/* line 191, ../sass/screen.scss */
+/* line 194, ../sass/screen.scss */
 .arrowHead.left {
   border-right: 4px solid black;
 }
-/* line 194, ../sass/screen.scss */
+/* line 197, ../sass/screen.scss */
 .arrowHead.up, .arrowHead.down {
   border-left: 4px solid transparent;
   border-right: 4px solid transparent;
 }
-/* line 198, ../sass/screen.scss */
+/* line 201, ../sass/screen.scss */
 .arrowHead.up {
   border-bottom: 4px solid black;
 }
-/* line 201, ../sass/screen.scss */
+/* line 204, ../sass/screen.scss */
 .arrowHead.down {
   border-top: 4px solid black;
 }
 
 /* old */
-/* line 212, ../sass/screen.scss */
+/* line 215, ../sass/screen.scss */
 .container {
   overflow: auto;
 }
 
-/* line 216, ../sass/screen.scss */
+/* line 219, ../sass/screen.scss */
 #left {
   float: left;
   width: 25%;
@@ -273,15 +278,15 @@ footer #itsOK {
   margin-left: 50px;
   display: inline-block;
 }
-/* line 223, ../sass/screen.scss */
+/* line 226, ../sass/screen.scss */
 #left h1 {
   font-size: 42px;
 }
-/* line 225, ../sass/screen.scss */
+/* line 228, ../sass/screen.scss */
 #left h1.brand {
   margin-left: -50px;
 }
-/* line 227, ../sass/screen.scss */
+/* line 230, ../sass/screen.scss */
 #left h1.brand img {
   display: inline-block;
   height: 168px;
@@ -291,34 +296,34 @@ footer #itsOK {
   -webkit-filter: contrast(200%) brightness(88%);
   filter: contrast(200%) brightness(88%);
 }
-/* line 237, ../sass/screen.scss */
+/* line 240, ../sass/screen.scss */
 #left h4 {
   margin-top: 8.4px;
   margin-left: 42px;
   font-size: 25.2px;
 }
-/* line 243, ../sass/screen.scss */
+/* line 246, ../sass/screen.scss */
 #left p {
   line-height: 160%;
 }
-/* line 249, ../sass/screen.scss */
+/* line 252, ../sass/screen.scss */
 #left #main {
   margin-top: 50px;
   max-width: 300px;
 }
-/* line 254, ../sass/screen.scss */
+/* line 257, ../sass/screen.scss */
 #left .align-right {
   text-align: right;
 }
 
-/* line 261, ../sass/screen.scss */
+/* line 264, ../sass/screen.scss */
 #right {
   width: 65%;
   float: right;
   height: 800px;
 }
 
-/* line 268, ../sass/screen.scss */
+/* line 271, ../sass/screen.scss */
 #county-name {
   height: 40px;
   text-align: right;
